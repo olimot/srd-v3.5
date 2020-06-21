@@ -1,0 +1,22 @@
+html {
+  display: grid;
+  align-items: center;
+}
+
+body {
+  display: block;
+  height: auto;
+  font-size: 18px;
+  max-width: 49.625em;
+  padding: 5.9375em;
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 992.5px) {
+  body {
+    font-size: 16px;
+    box-sizing: content-box;
+    max-width: 37.75em;
+    padding: 5vw;
+  }
+}
