@@ -1,3 +1,5 @@
+@import "modified.css";
+
 html {
   display: grid;
   align-items: center;
@@ -6,47 +8,26 @@ html {
 body {
   display: block;
   height: auto;
-  font-size: 16px;
-  max-width: 49.625em;
-  padding: 5.9375em;
+  max-width: 793.5px;
   margin: 0 auto;
+
+  font-size: 19px;
+  letter-spacing: -1px;
+  text-align: justify;
 }
 
-table {
-  display: block;
-  overflow-x: auto;
-  font-size: 12px;
-  width: 100%;
+body > :first-child:last-child {
+  margin: 6.6667%;
 }
 
-table p {
-  margin: 0;
+@media only screen and (max-width: 793.5px) {
+  body {
+    font-size: 2.3736vw;
+  }
 }
 
-td,
-th {
-  padding: 0 10px;
-  border-bottom: 2px solid #000;
-}
-
-td:first-child:last-child,
-th:first-child:last-child {
-  padding-top: 1em;
-  padding-left: 0;
-  font-weight: normal;
-  border-bottom: 0;
-}
-
-@media only screen and (max-width: 992.5px) {
+@media only screen and (max-width: 692px) {
   body {
     font-size: 16px;
-    box-sizing: content-box;
-    max-width: 37.75em;
-    padding: 5vw;
-  }
-
-  table {
-    width: 100%;
-    max-width: 90vw;
   }
 }
