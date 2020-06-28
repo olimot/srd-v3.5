@@ -16,7 +16,7 @@ body {
   text-align: justify;
 }
 
-body > :first-child:last-child {
+body > :first-child {
   margin: 6.6667%;
 }
 
