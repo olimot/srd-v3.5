@@ -1,10 +1,14 @@
-.paper--listing {
+.paper--horizontal {
   text-align: left;
   font-size: 16px;
   max-width: 1122.2357142857143px;
 }
 
-.paper--listing .paper__content {
+table {
+  break-inside: avoid;
+}
+
+.paper--horizontal .paper__content--listing {
   margin: 6.6667%;
   column-count: 5;
 }
@@ -15,19 +19,23 @@
 }
 
 @media only screen and (max-width: 1122.2357142857143px) {
-  .paper--listing .paper__content {
+  .paper--horizontal .paper__content--listing {
     column-count: 3;
+  }
+
+  .paper--horizontal .paper__content--column {
+    column-count: 1;
   }
 }
 
 @media only screen and (max-width: 793.5px) {
-  .paper--listing .paper__content {
+  .paper--horizontal .paper__content--listing {
     column-count: 2;
   }
 }
 
 @media only screen and (max-width: 692px) {
-  .paper__content--column {
+  .paper__content--listing {
     column-count: 1;
   }
 }

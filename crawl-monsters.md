@@ -1,3 +1,4 @@
+```js
 Array.from(document.querySelectorAll("h3 a"))
   .filter((a) => a.textContent.match(/Monsters \(/))
   .flatMap((a) => [...a.parentElement.nextElementSibling.querySelectorAll("a")])
@@ -12,3 +13,4 @@ Array.from(document.querySelectorAll("h3 a"))
   })
   .map((a) => `        <li>${a.outerHTML}</li>`)
   .join("\n");
+```
