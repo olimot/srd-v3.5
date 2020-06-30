@@ -46,7 +46,11 @@ table {
 }
 
 @media only screen and (max-width: 692px) {
-  .paper__content--listing {
+  .paper--horizontal .paper__content--listing {
     column-count: 1;
+  }
+
+  .paper__grid-list {
+    display: block;
   }
 }
