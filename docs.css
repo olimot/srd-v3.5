@@ -1,5 +1,9 @@
-html body {
+@import "paper-body.css";
+@import "paper-listing.css";
+
+.paper {
   text-align: left;
+  letter-spacing: 0;
 }
 
 table {

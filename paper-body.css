@@ -1,33 +1,28 @@
-@import "modified.css";
-
-html {
+.paper {
   display: grid;
+  min-height: 100vh;
   align-items: center;
-}
-
-body {
-  display: block;
+  justify-content: center;
   height: auto;
   max-width: 793.5px;
   margin: 0 auto;
-
   font-size: 19px;
   letter-spacing: -1px;
   text-align: justify;
 }
 
-body > :first-child {
+.paper__content {
   margin: 6.6667%;
 }
 
 @media only screen and (max-width: 793.5px) {
-  body {
+  .paper {
     font-size: 2.3736vw;
   }
 }
 
 @media only screen and (max-width: 692px) {
-  body {
+  .paper {
     font-size: 16px;
   }
 }
