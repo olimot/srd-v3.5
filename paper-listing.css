@@ -19,6 +19,11 @@ table {
   column-count: 5;
 }
 
+.paper__content--listing h2,
+.paper__content--listing h3 {
+  column-span: all;
+}
+
 .paper__footer {
   margin: 0 6.6667%;
   margin-top: -6.6667%;
