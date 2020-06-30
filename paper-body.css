@@ -1,52 +1,28 @@
-html {
+.paper {
   display: grid;
+  min-height: 100vh;
   align-items: center;
-}
-
-body {
-  display: block;
+  justify-content: center;
   height: auto;
-  font-size: 16px;
-  max-width: 49.625em;
-  padding: 5.9375em;
+  max-width: 793.5px;
   margin: 0 auto;
+  font-size: 19px;
+  letter-spacing: -1px;
+  text-align: justify;
 }
 
-table {
-  display: block;
-  overflow-x: auto;
-  font-size: 12px;
-  width: 100%;
+.paper__content {
+  margin: 6.6667%;
 }
 
-table p {
-  margin: 0;
-}
-
-td,
-th {
-  padding: 0 10px;
-  border-bottom: 2px solid #000;
-}
-
-td:first-child:last-child,
-th:first-child:last-child {
-  padding-top: 1em;
-  padding-left: 0;
-  font-weight: normal;
-  border-bottom: 0;
-}
-
-@media only screen and (max-width: 992.5px) {
-  body {
-    font-size: 16px;
-    box-sizing: content-box;
-    max-width: 37.75em;
-    padding: 5vw;
+@media only screen and (max-width: 793.5px) {
+  .paper {
+    font-size: 2.3736vw;
   }
+}
 
-  table {
-    width: 100%;
-    max-width: 90vw;
+@media only screen and (max-width: 692px) {
+  .paper {
+    font-size: 16px;
   }
 }

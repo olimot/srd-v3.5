@@ -1,0 +1,33 @@
+.paper--listing {
+  text-align: left;
+  font-size: 16px;
+  max-width: 1122.2357142857143px;
+}
+
+.paper--listing .paper__content {
+  margin: 6.6667%;
+  column-count: 5;
+}
+
+.paper__footer {
+  margin: 0 6.6667%;
+  margin-top: -6.6667%;
+}
+
+@media only screen and (max-width: 1122.2357142857143px) {
+  .paper--listing .paper__content {
+    column-count: 3;
+  }
+}
+
+@media only screen and (max-width: 793.5px) {
+  .paper--listing .paper__content {
+    column-count: 2;
+  }
+}
+
+@media only screen and (max-width: 692px) {
+  .paper__content--column {
+    column-count: 1;
+  }
+}
