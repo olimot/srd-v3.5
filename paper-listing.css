@@ -9,6 +9,11 @@ table {
   break-inside: avoid;
 }
 
+.paper__grid-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
 .paper--horizontal .paper__content--listing {
   margin: 6.6667%;
   column-count: 5;
