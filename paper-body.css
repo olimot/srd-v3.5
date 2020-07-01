@@ -20,6 +20,10 @@
   column-span: all;
 }
 
+.full-width-table {
+  break-inside: avoid;
+}
+
 .paper__content h2,
 .paper__content h3 {
   margin-top: 6em;
