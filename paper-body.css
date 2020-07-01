@@ -1,28 +1,30 @@
 .paper {
-  display: grid;
-  min-height: 100vh;
-  align-items: center;
-  justify-content: center;
-  height: auto;
-  max-width: 793.5px;
+  max-width: 952px;
   margin: 0 auto;
-  font-size: 19px;
-  letter-spacing: -1px;
-  text-align: justify;
 }
 
 .paper__content {
-  margin: 6.6667%;
+  padding: 8.8235%;
+  column-count: 2;
+  column-gap: 3.7815%;
+  font-size: 16px;
+  letter-spacing: -1px;
 }
 
-@media only screen and (max-width: 793.5px) {
-  .paper {
-    font-size: 2.3736vw;
-  }
+.paper__content > p:first-child,
+.paper__content h1,
+.paper__content h1,
+.paper__content h2,
+.paper__content h3,
+.paper__content .full-width-table {
+  column-span: all;
 }
 
-@media only screen and (max-width: 692px) {
-  .paper {
-    font-size: 16px;
-  }
+.paper__content h2,
+.paper__content h3 {
+  margin-top: 6em;
+}
+
+table {
+  width: 100%;
 }

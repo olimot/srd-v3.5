@@ -1,16 +1,8 @@
 @import "paper-body.css";
 @import "paper-listing.css";
 
-.paper {
-  text-align: left;
-  letter-spacing: 0;
-}
-
 table {
-  display: block;
-  overflow-x: auto;
   font-size: 12px;
-  width: 100%;
 }
 
 table p {
@@ -29,11 +21,4 @@ th:first-child:last-child {
   padding-left: 0;
   font-weight: normal;
   border-bottom: 0;
-}
-
-@media only screen and (max-width: 692px) {
-  table {
-    width: 100%;
-    max-width: 90vw;
-  }
 }
