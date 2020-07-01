@@ -11,12 +11,6 @@
   letter-spacing: -1px;
 }
 
-@media only screen and (max-width: 952px) {
-  .paper__content {
-    column-count: 1;
-  }
-}
-
 .paper__content > p:first-child,
 .paper__content h1,
 .paper__content h1,
@@ -35,9 +29,30 @@
   margin-top: 6em;
 }
 
+.paper__content h1 + h2,
+.paper__content h1 + h3,
+.paper__content h2 + h2,
+.paper__content h2 + h3 {
+  margin-top: 1em;
+}
+
 table {
   width: 100%;
   border-spacing: 0;
   border-collapse: collapse;
   margin: 1.3334em 0;
+}
+
+@media only screen and (max-width: 952px) {
+  .paper__content {
+    column-count: 1;
+  }
+
+  .paper__content h2 {
+    margin: 0.83em 0;
+  }
+
+  .paper__content h3 {
+    margin: 1em 0;
+  }
 }
