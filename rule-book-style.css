@@ -74,6 +74,14 @@ table {
   column-count: 4;
 }
 
+.paper__content--listing h2 {
+  margin-top: 0.83em;
+}
+
+.paper__content--listing h3 {
+  margin-top: 1em;
+}
+
 td,
 th {
   padding: 0 10px;
