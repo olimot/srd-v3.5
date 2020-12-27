@@ -1,13 +1,11 @@
 .toc {
-  & > .anchor-2 {
-    font-size: 18px;
-  }
-
   & > .anchor-3 {
+    font-weight: normal;
     padding-left: 24px;
   }
 
   & > .anchor-4 {
+    font-weight: normal;
     padding-left: 28px;
   }
 }
@@ -16,15 +14,13 @@
   h2,
   h3,
   h4 {
-    padding-top: 10em;
-    margin-top: -9em;
-    width: 1px;
-    overflow: visible;
-    white-space: nowrap;
-  }
-
-  h2 {
-    padding-top: 7.67em;
-    margin-top: -7em;
+    &:before {
+      content: '';
+      display: block;
+      position: relative;
+      width: 0;
+      height: 66px;
+      margin-top: -66px;
+    }
   }
 }

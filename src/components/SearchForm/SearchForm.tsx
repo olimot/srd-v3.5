@@ -65,11 +65,11 @@ const SearchForm = () => {
           <input
             type="search"
             name="search"
-            placeholder="Search headings"
+            placeholder="Goto..."
             value={search.value}
             onChange={e => setSearch({ value: e.target.value, idx: -1 })}
           />
-          <span className={classNames(styles.autocmplLayer, suggestionOnRest.length > 0 && styles.active)}>
+          <span className={classNames(styles.autocmplLayer, suggestion.length > 0 && styles.active)}>
             {suggestion.map((item, idx) => (
               <Link href={item.href} key={item.href}>
                 <a

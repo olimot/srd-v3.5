@@ -476,7 +476,6 @@ body,
   background: #fafafa;
   border-right: 1px solid #e5e5e5;
   padding: 8px 0;
-  transition: left 0.2s ease;
 }
 
 .layout--site-header > nav {
@@ -534,6 +533,10 @@ table {
 @media (max-width: 660px) {
   .layout > nav {
     z-index: 101;
+  }
+
+  .layout > header input {
+    width: 100px;
   }
 
   .layout--site-header > nav {
