@@ -1,0 +1,28 @@
+{
+  "Mocha test": {
+    "scope": "typescript",
+    "prefix": "mocha",
+    "body": [
+      "import assert from 'assert';",
+      "import ${TM_FILENAME/(\\.(spec|test))?\\.(ts|tsx)//gi} from './${TM_FILENAME/(\\.(spec|test))?\\.(ts|tsx)//gi}';",
+      "",
+      "describe('${TM_FILENAME/(\\.(spec|test))?\\.(ts|tsx)//gi}', function () {",
+      "  it('should be exported as default', async function() {",
+      "    assert(${TM_FILENAME/(\\.(spec|test))?\\.(ts|tsx)//gi});",
+      "  });",
+      "});",
+      ""
+    ],
+    "description": "Create a mocha test file."
+  },
+  "it('should be exported as default', async function() {})": {
+    "scope": "typescript",
+    "prefix": "it",
+    "body": [
+      "it('should be exported as default', async function () {",
+      "  assert(${TM_FILENAME/(\\.(spec|test))?\\.(ts|tsx)//gi});",
+      "});"
+    ],
+    "description": "Create a single mocha test."
+  }
+}

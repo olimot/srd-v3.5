@@ -1,0 +1,6 @@
+.cache
+out
+bin
+node_modules
+/*.ts
+/*.js

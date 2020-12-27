@@ -1,2 +1,3 @@
-# d20-srd-3.5e
-Revised (v.3.5) System Reference Document
+# SRD v3.5 Workbench
+
+Source: http://www.wizards.com/default.asp?x=d20/article/srd35 (archived: https://archive.org/details/dnd35srd)

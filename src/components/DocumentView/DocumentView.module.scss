@@ -1,0 +1,30 @@
+.toc {
+  & > .anchor-2 {
+    font-size: 18px;
+  }
+
+  & > .anchor-3 {
+    padding-left: 24px;
+  }
+
+  & > .anchor-4 {
+    padding-left: 28px;
+  }
+}
+
+.documentView {
+  h2,
+  h3,
+  h4 {
+    padding-top: 10em;
+    margin-top: -9em;
+    width: 1px;
+    overflow: visible;
+    white-space: nowrap;
+  }
+
+  h2 {
+    padding-top: 7.67em;
+    margin-top: -7em;
+  }
+}
