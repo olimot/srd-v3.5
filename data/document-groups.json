@@ -1,6 +1,6 @@
 [
   {
-    "groupName": "BasicRules",
+    "groupName": "Basic Rules and Legal",
     "pages": [
       {
         "textContent": "Legal Information",
@@ -93,77 +93,60 @@
     ]
   },
   {
-    "groupName": "Divine",
+    "groupName": "Spells",
     "pages": [
       {
-        "textContent": "Divine Ranks and Powers",
-        "href": "DivineRanksandPowers.html"
+        "textContent": "Magic Overview",
+        "href": "MagicOverview.html"
       },
       {
-        "textContent": "Divine Abilities and Feats",
-        "href": "DivineAbilitiesandFeats.html"
+        "textContent": "Spell List I",
+        "href": "SpellListI.html"
       },
       {
-        "textContent": "Divine Domains and Spells",
-        "href": "DivineDomainsandSpells.html"
+        "textContent": "Spell List II",
+        "href": "SpellListII.html"
       },
       {
-        "textContent": "Divine Minions",
-        "href": "DivineMinions.html"
+        "textContent": "Spells (A-B)",
+        "href": "SpellsA-B.html"
+      },
+      {
+        "textContent": "Spells C",
+        "href": "SpellsC.html"
+      },
+      {
+        "textContent": "Spells (D-E)",
+        "href": "SpellsD-E.html"
+      },
+      {
+        "textContent": "Spells (F-G)",
+        "href": "SpellsF-G.html"
+      },
+      {
+        "textContent": "Spells (H-L)",
+        "href": "SpellsH-L.html"
+      },
+      {
+        "textContent": "Spells (M-O)",
+        "href": "SpellsM-O.html"
+      },
+      {
+        "textContent": "Spells (P-R)",
+        "href": "SpellsP-R.html"
+      },
+      {
+        "textContent": "Spells (S)",
+        "href": "SpellsS.html"
+      },
+      {
+        "textContent": "Spells (T-Z)",
+        "href": "SpellsT-Z.html"
       }
     ]
   },
   {
-    "groupName": "Epic",
-    "pages": [
-      {
-        "textContent": "Epic Level Basics",
-        "href": "EpicLevelBasics.html"
-      },
-      {
-        "textContent": "Epic Classes",
-        "href": "EpicClasses.html"
-      },
-      {
-        "textContent": "Epic Prestige Classes",
-        "href": "EpicPrestigeClasses.html"
-      },
-      {
-        "textContent": "Epic Skills",
-        "href": "EpicSkills.html"
-      },
-      {
-        "textContent": "Epic Feats",
-        "href": "EpicFeats.html"
-      },
-      {
-        "textContent": "Epic Spells",
-        "href": "EpicSpells.html"
-      },
-      {
-        "textContent": "Epic Magic Items 1",
-        "href": "EpicMagicItems1.html"
-      },
-      {
-        "textContent": "Epic Magic Items 2",
-        "href": "EpicMagicItems2.html"
-      },
-      {
-        "textContent": "Epic Monsters (A-E)",
-        "href": "EpicMonsters(A-E).html"
-      },
-      {
-        "textContent": "Epic Monsters (G-W)",
-        "href": "EpicMonsters(G-W).html"
-      },
-      {
-        "textContent": "Epic Obstacles",
-        "href": "EpicObstacles.html"
-      }
-    ]
-  },
-  {
-    "groupName": "MagicItems",
+    "groupName": "Magic Items",
     "pages": [
       {
         "textContent": "Magic Items I (Basics and Creation)",
@@ -318,55 +301,72 @@
     ]
   },
   {
-    "groupName": "Spells",
+    "groupName": "Epic",
     "pages": [
       {
-        "textContent": "Magic Overview",
-        "href": "MagicOverview.html"
+        "textContent": "Epic Level Basics",
+        "href": "EpicLevelBasics.html"
       },
       {
-        "textContent": "Spell List I",
-        "href": "SpellListI.html"
+        "textContent": "Epic Classes",
+        "href": "EpicClasses.html"
       },
       {
-        "textContent": "Spell List II",
-        "href": "SpellListII.html"
+        "textContent": "Epic Prestige Classes",
+        "href": "EpicPrestigeClasses.html"
       },
       {
-        "textContent": "Spells (A-B)",
-        "href": "SpellsA-B.html"
+        "textContent": "Epic Skills",
+        "href": "EpicSkills.html"
       },
       {
-        "textContent": "Spells C",
-        "href": "SpellsC.html"
+        "textContent": "Epic Feats",
+        "href": "EpicFeats.html"
       },
       {
-        "textContent": "Spells (D-E)",
-        "href": "SpellsD-E.html"
+        "textContent": "Epic Spells",
+        "href": "EpicSpells.html"
       },
       {
-        "textContent": "Spells (F-G)",
-        "href": "SpellsF-G.html"
+        "textContent": "Epic Magic Items 1",
+        "href": "EpicMagicItems1.html"
       },
       {
-        "textContent": "Spells (H-L)",
-        "href": "SpellsH-L.html"
+        "textContent": "Epic Magic Items 2",
+        "href": "EpicMagicItems2.html"
       },
       {
-        "textContent": "Spells (M-O)",
-        "href": "SpellsM-O.html"
+        "textContent": "Epic Monsters (A-E)",
+        "href": "EpicMonsters(A-E).html"
       },
       {
-        "textContent": "Spells (P-R)",
-        "href": "SpellsP-R.html"
+        "textContent": "Epic Monsters (G-W)",
+        "href": "EpicMonsters(G-W).html"
       },
       {
-        "textContent": "Spells (S)",
-        "href": "SpellsS.html"
+        "textContent": "Epic Obstacles",
+        "href": "EpicObstacles.html"
+      }
+    ]
+  },
+  {
+    "groupName": "Divine",
+    "pages": [
+      {
+        "textContent": "Divine Ranks and Powers",
+        "href": "DivineRanksandPowers.html"
       },
       {
-        "textContent": "Spells (T-Z)",
-        "href": "SpellsT-Z.html"
+        "textContent": "Divine Abilities and Feats",
+        "href": "DivineAbilitiesandFeats.html"
+      },
+      {
+        "textContent": "Divine Domains and Spells",
+        "href": "DivineDomainsandSpells.html"
+      },
+      {
+        "textContent": "Divine Minions",
+        "href": "DivineMinions.html"
       }
     ]
   }

@@ -65,7 +65,8 @@ const addSemantics = async () => {
           ?.trim()
           .toLowerCase()
           .replace(/\s+/, ' ')
-          .replace(/(^\w{1})|([^a-zA-Z]\w{1})/g, match => match.toUpperCase()) || '',
+          .replace(/(^\w{1})|([^a-zA-Z]\w{1})/g, match => match.toUpperCase())
+          .replace(/\b(i{1,3}|iv|vi{0,3})\b/gi, match => match.toUpperCase()) || '',
       hnum: parseInt(element.tagName.substr(1), 10),
     }));
   });
