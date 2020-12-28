@@ -12,7 +12,7 @@ const App = () => {
       <Head>
         <title>SRD3.5</title>
       </Head>
-      <div className="layout__wrap">
+      <div className={classNames(styles.appwrap, 'layout__wrap')}>
         <h1>Revised (v.3.5) System Reference Document</h1>
         <div className={styles.searchForm}>
           <SearchForm />

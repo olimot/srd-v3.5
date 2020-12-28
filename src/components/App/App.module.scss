@@ -5,6 +5,14 @@
   }
 }
 
+.appwrap {
+  margin-top: 0;
+  h1 {
+    margin-top: 0;
+  }
+  max-width: 1188px;
+}
+
 .tableOfContents {
   font-family: sans-serif;
   column-count: 4;

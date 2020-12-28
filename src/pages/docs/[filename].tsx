@@ -8,12 +8,12 @@ const Post = ({ filename, html }: { filename: string; html: string }) => {
 
 export async function getStaticPaths() {
   const filenames = (await fs.readdir('./data/html')).filter(a => a.match(/.html$/));
-  const paths = filenames.map(a => `/docs/${a.split('.')[0]}`);
+  const paths = filenames.map(a => `/docs/${encodeURIComponent(a.split('.')[0])}`);
   return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }: { params: any }) {
-  const filename = params.filename as string;
+  const filename = decodeURIComponent(params.filename as string);
   const html = await fs.readFile(`./data/html/${filename}.html`, 'utf8');
   return { props: { html, filename } };
 }
