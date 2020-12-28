@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import Link from 'next/link';
+import Head from 'next/head';
 import React from 'react';
 import documentGroups from '../../../data/document-groups.json';
 import SearchForm from '../SearchForm';
@@ -8,6 +9,9 @@ import styles from './App.module.scss';
 const App = () => {
   return (
     <div className={classNames(styles.app, 'layout')}>
+      <Head>
+        <title>SRD3.5</title>
+      </Head>
       <div className="layout__wrap">
         <h1>Revised (v.3.5) System Reference Document</h1>
         <div className={styles.searchForm}>

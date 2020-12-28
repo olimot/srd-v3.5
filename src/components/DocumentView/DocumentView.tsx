@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/no-danger */
 import classNames from 'classnames';
+import Head from 'next/head';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
 import anchors from '../../../data/anchors.json';
@@ -50,6 +51,9 @@ const DocumentView = ({ filename, html }: { filename: string; html: string }) =>
 
   return (
     <div className={classNames('layout layout--site-header layout--ready', menuActive && 'layout--fixed-drawer')}>
+      <Head>
+        <title>{filename} - SRD3.5</title>
+      </Head>
       <header ref={headerref}>
         <button type="button" className="icon icon--menu" onClick={() => setMenuActive(!menuActive)}>
           Navigate this page
