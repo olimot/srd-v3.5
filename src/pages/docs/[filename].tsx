@@ -8,7 +8,7 @@ const Post = ({ filename, html }: { filename: string; html: string }) => {
 
 export async function getStaticPaths() {
   const filenames = (await fs.readdir('./data/html')).filter(a => a.match(/.html$/));
-  const paths = filenames.map(a => `/docs/${encodeURIComponent(a.split('.')[0])}`);
+  const paths = filenames.map(a => `/docs/${a.split('.')[0]}`);
   return { paths, fallback: false };
 }
 
