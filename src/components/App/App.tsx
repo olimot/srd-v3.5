@@ -23,6 +23,9 @@ const App = () => {
       </header>
       <div className={classNames(styles.appwrap, 'layout__wrap')}>
         <h1 className={styles.center}>Revised (v.3.5) System Reference Document</h1>
+        <div className={styles.center}>
+          <SearchForm />
+        </div>
         <div className={styles.tableOfContents}>
           {documentGroups.map(group => {
             return (
