@@ -12,11 +12,17 @@ const App = () => {
       <Head>
         <title>SRD3.5</title>
       </Head>
-      <div className={classNames(styles.appwrap, 'layout__wrap')}>
-        <h1>Revised (v.3.5) System Reference Document</h1>
-        <div className={styles.searchForm}>
+      <header>
+        <nav>
           <SearchForm />
-        </div>
+          <Link href="/">
+            <a className="link">Home</a>
+          </Link>
+          <a href="https://github.com/olimot/srd-v3.5">GitHub</a>
+        </nav>
+      </header>
+      <div className={classNames(styles.appwrap, 'layout__wrap')}>
+        <h1 className={styles.center}>Revised (v.3.5) System Reference Document</h1>
         <div className={styles.tableOfContents}>
           {documentGroups.map(group => {
             return (

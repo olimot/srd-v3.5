@@ -10,26 +10,20 @@ import SearchForm from '../SearchForm';
 import styles from './DocumentView.module.scss';
 
 const DocumentView = ({ filename, html }: { filename: string; html: string }) => {
-  const [menuActive, setMenuActive] = useState(false);
+  const [layoutReady, setLayoutReady] = useState<boolean>(false);
+  const [menuActive, setMenuActive] = useState<boolean>(false);
   const [, docHTML] = html.split(/<body[^<>]*>|<\/body>/gi);
-  const urlRe = new RegExp(`^${filename.replace(/[.*+?^${}()|[\]\\]}/g, '\\$&')}\\.html`);
-  const headings = anchors.filter(i => urlRe.test(i.filename));
+  const htmlFilename = `${filename}.html`;
 
   const headerref = useRef<HTMLElement | null>(null);
   const navref = useRef<HTMLElement | null>(null);
   useEffect(() => {
-    const showDrawerCn = `layout--fixed-drawer`;
-    const layout = document.querySelector('.layout');
-    const drawer = document.querySelector('.layout>nav') as HTMLElement;
-    if (!drawer || !layout) return () => {};
-    setTimeout(() => layout.classList.add('layout--ready'), 16);
-    if (window.innerWidth < 660) {
-      if (layout.classList.contains(showDrawerCn)) {
-        layout.classList.remove('layout--ready');
-        setMenuActive(false);
-        layout.classList.remove(showDrawerCn);
-      }
-      const onclick = (e: MouseEvent) => {
+    const mobileWidth = 1126;
+    if (window.innerWidth >= mobileWidth) setMenuActive(true);
+    setTimeout(() => setLayoutReady(true), 16);
+
+    const onclick = (e: MouseEvent) => {
+      if (window.innerWidth < mobileWidth) {
         if (!e.target || !navref.current || !headerref.current) return;
         let parent = (e.target as Element).parentElement;
         while (parent) {
@@ -37,20 +31,14 @@ const DocumentView = ({ filename, html }: { filename: string; html: string }) =>
           parent = parent.parentElement;
         }
         setMenuActive(false);
-      };
-      window.addEventListener('click', onclick);
-      return () => window.removeEventListener('click', onclick);
-    }
-
-    if (window.innerWidth >= 660 && !layout.classList.contains(showDrawerCn)) {
-      layout.classList.remove('layout--ready');
-      setMenuActive(true);
-    }
-    return () => {};
+      }
+    };
+    window.addEventListener('click', onclick);
+    return () => window.removeEventListener('click', onclick);
   }, []);
 
   return (
-    <div className={classNames('layout layout--site-header layout--ready', menuActive && 'layout--fixed-drawer')}>
+    <div className={classNames('layout', layoutReady && 'layout--ready', menuActive && 'layout--fixed-drawer')}>
       <Head>
         <title>{filename} - SRD3.5</title>
       </Head>
@@ -58,29 +46,29 @@ const DocumentView = ({ filename, html }: { filename: string; html: string }) =>
         <button type="button" className="icon icon--menu" onClick={() => setMenuActive(!menuActive)}>
           Navigate this page
         </button>
-        <div>
-          <Link href="/">
-            <a className="link">SRD 3.5</a>
-          </Link>
-          <SearchForm />
-        </div>
         <nav ref={navref}>
-          <a href="https://github.com/olimot/srd-v3.5">GitHub</a>{' '}
+          <SearchForm />
+          <Link href="/">
+            <a className="link">Home</a>
+          </Link>
+          <a href="https://github.com/olimot/srd-v3.5">GitHub</a>
         </nav>
       </header>
       <nav className={styles.toc}>
-        {headings.map(heading => (
-          <a
-            href={`#${heading.href.split('#').pop()}`}
-            key={heading.href}
-            className={styles[`anchor-${heading.hnum}`]}
-            onClick={() => {
-              if (window.innerWidth < 660) setMenuActive(false);
-            }}
-          >
-            {heading.textContent}
-          </a>
-        ))}
+        {anchors
+          .filter(a => a.filename === htmlFilename)
+          .map(heading => (
+            <a
+              href={heading.href.replace(/\.html/, '')}
+              key={heading.href}
+              className={styles[`anchor-${heading.hnum}`]}
+              onClick={() => {
+                if (window.innerWidth < 660) setMenuActive(false);
+              }}
+            >
+              {heading.textContent}
+            </a>
+          ))}
       </nav>
       <div className={classNames(styles.documentView, 'layout__wrap')} dangerouslySetInnerHTML={{ __html: docHTML }} />
     </div>

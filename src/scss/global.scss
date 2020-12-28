@@ -4,9 +4,15 @@ body {
 }
 
 body {
-  font: 16px 'Times New Roman', serif;
+  font: 16px sans-serif;
   line-height: 1.7;
   margin: 16px;
+}
+
+td,
+th {
+  font-size: 14px;
+  line-height: 19px;
 }
 
 main {
@@ -363,6 +369,17 @@ body,
   min-height: 100%; /* height: 100%로 했을 경우 paper-body에서 100%보다 더 늘어날 경우 padding-bottom이 안먹힌다. */
 }
 
+.table-container table {
+  margin-left: 50%;
+  transform: translate(-50%);
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  line-height: 1.2;
+}
+
 .layout {
   box-sizing: border-box;
   display: flex;
@@ -374,25 +391,16 @@ body,
   margin: 0;
   position: relative;
   left: 0;
-  transition: width 0.2s ease, left 0.2s ease;
   padding-top: 48px;
 }
 
-.layout__wrap {
-  transition: left 0.2s ease;
-  max-width: 793.7px;
-  margin: 16px;
-}
-
 .layout > header {
-  position: absolute;
+  box-sizing: border-box;
+  position: fixed;
   z-index: 100;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
   top: 0;
   left: 0;
-  right: 0;
-  max-width: none;
+  width: 100%;
   height: 48px;
   margin: 0;
   padding: 0 16px;
@@ -408,6 +416,10 @@ body,
   display: inline;
 }
 
+.layout > header form button[type='submit'] {
+  display: none;
+}
+
 .layout > header p {
   margin-left: 16px;
 }
@@ -417,7 +429,7 @@ body,
 }
 
 .layout > header nav {
-  grid-column: 3/4;
+  float: right;
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
@@ -435,11 +447,6 @@ body,
 .layout > header .link:visited,
 .layout > header nav a:visited {
   color: #888888;
-}
-
-.layout--site-header > header {
-  position: fixed;
-  left: 0;
 }
 
 .icon--menu,
@@ -469,41 +476,53 @@ body,
   position: fixed;
   z-index: 99;
   top: 0;
-  left: calc(60px - 100%);
+  left: 0;
+  transform: translate(-100%);
   width: calc(100vw - 60px);
   max-width: 300px;
-  height: 100vh;
+  bottom: 0;
   overflow-y: auto;
   background: #fafafa;
   border-right: 1px solid #e5e5e5;
   padding: 8px 0;
 }
 
-.layout--site-header > nav {
-  padding-top: 48px;
-}
-
-.layout--ready > header,
-.layout--ready > nav {
-  transition: left 0.2s ease;
-}
-
 .layout > nav a {
   display: block;
-  padding: 8px 16px;
+  padding: 4px 16px;
 }
 
-.layout--fixed-drawer {
-  width: calc(100% - 300px);
-  left: min(300px, calc(100vw - 60px));
+.layout__wrap {
+  box-sizing: border-box;
+  max-width: 826px;
+  padding: 16px;
 }
 
-.layout--site-header.layout--fixed-drawer > header {
-  left: 0;
+.layout--ready {
+  transition: width 0.2s ease;
+}
+
+.layout--ready > header {
+  transition: width 0.2s ease, transform 0.2s ease;
+}
+
+.layout--ready > nav,
+.layout--ready .layout__wrap {
+  transition: transform 0.2s ease;
+}
+
+.layout--fixed-drawer,
+.layout--fixed-drawer > header {
+  width: calc(100% - min(300px, 100vw - 60px));
 }
 
 .layout--fixed-drawer > nav {
-  left: 0;
+  transform: translate(0);
+}
+
+.layout--fixed-drawer > header,
+.layout--fixed-drawer .layout__wrap {
+  transform: translate(min(300px, calc(100vw - 60px)));
 }
 
 .layout--fixed-drawer > header .icon--menu,
@@ -515,29 +534,13 @@ body,
   background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iYmxhY2siIHdpZHRoPSIxOHB4IiBoZWlnaHQ9IjE4cHgiPjxwYXRoIGQ9Ik0wIDBoMjR2MjRIMFYweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik00IDE4aDE2Yy41NSAwIDEtLjQ1IDEtMXMtLjQ1LTEtMS0xSDRjLS41NSAwLTEgLjQ1LTEgMXMuNDUgMSAxIDF6bTAtNWgxNmMuNTUgMCAxLS40NSAxLTFzLS40NS0xLTEtMUg0Yy0uNTUgMC0xIC40NS0xIDFzLjQ1IDEgMSAxek0zIDdjMCAuNTUuNDUgMSAxIDFoMTZjLjU1IDAgMS0uNDUgMS0xcy0uNDUtMS0xLTFINGMtLjU1IDAtMSAuNDUtMSAxeiIvPjwvc3ZnPg==');
 }
 
-.table-container {
-  max-width: calc(100vw - 32px);
-  overflow-x: auto;
-  overflow-y: hidden;
-}
-
-.layout--fixed-drawer .table-container {
-  max-width: calc(100vw - 332px);
-}
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  line-height: 1.2;
-}
-
-@media (max-width: 660px) {
+@media (max-width: 1126px) {
   .layout > nav {
     z-index: 101;
   }
 
   .layout > header input {
-    width: 100px;
+    width: 130px;
   }
 
   .layout--site-header > nav {
@@ -554,7 +557,21 @@ table {
     overflow: hidden;
   }
 
-  .layout--fixed-drawer .table-container {
+  .layout {
+    overflow-x: hidden;
+  }
+
+  .layout > header,
+  .layout > .layout__wrap {
+    width: 100%;
+  }
+  .layout--fixed-drawer {
+    align-items: flex-start;
+  }
+
+  .table-container {
     max-width: calc(100vw - 32px);
+    overflow-x: auto;
+    overflow-y: visible;
   }
 }

@@ -65,7 +65,7 @@ const SearchForm = () => {
           <input
             type="search"
             name="search"
-            placeholder="Goto..."
+            placeholder="Go to page..."
             value={search.value}
             onChange={e => setSearch({ value: e.target.value, idx: -1 })}
           />

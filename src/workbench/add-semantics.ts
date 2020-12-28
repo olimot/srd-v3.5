@@ -1,5 +1,6 @@
 import fs from 'fs-extra';
 import modifyHtmls from './modifyHtmls';
+import documentGroups from '../../data/document-groups.json';
 
 const addSemantics = async () => {
   const result = await modifyHtmls('./.cache/sanitized-html', './data/html', () => {
@@ -34,6 +35,7 @@ const addSemantics = async () => {
       }
     });
 
+    let isFirstPassed = false;
     document.body.querySelectorAll('div').forEach(q => {
       const fontSize = parseInt(window.getComputedStyle(q).fontSize, 10);
       let element: Element | null = null;
@@ -42,7 +44,8 @@ const addSemantics = async () => {
       } else if (fontSize >= 16 && fontSize < 24) {
         element = changeTagName(q, 'h3', true);
       } else if (fontSize >= 24) {
-        element = changeTagName(q, 'h2', true);
+        element = changeTagName(q, isFirstPassed ? 'h2' : 'h1', true);
+        isFirstPassed = true;
       }
 
       if (element) {
@@ -71,9 +74,12 @@ const addSemantics = async () => {
     }));
   });
 
-  const anchorResult = Object.entries(result).flatMap(([k, vs]) => {
-    return vs.map(v => ({ ...v, filename: k, href: `${k}#${v.id}` }));
+  const anchorResult = documentGroups.flatMap(({ groupName, pages }) => {
+    return pages.flatMap(page => {
+      return result[page.href].map(v => ({ ...v, filename: page.href, href: `${page.href}#${v.id}`, groupName }));
+    });
   });
+
   fs.writeJSONSync('./data/anchors.json', anchorResult);
 };
 

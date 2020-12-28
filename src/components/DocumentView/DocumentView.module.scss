@@ -1,19 +1,32 @@
 .toc {
+  a {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  & > .anchor-1,
+  & > .anchor-2 {
+    font-weight: normal;
+  }
+
   & > .anchor-3 {
     font-weight: normal;
-    padding-left: 24px;
+    padding-left: 28px;
   }
 
   & > .anchor-4 {
     font-weight: normal;
-    padding-left: 28px;
+    padding-left: 40px;
   }
 }
 
 .documentView {
+  h1,
   h2,
   h3,
   h4 {
+    margin: 0;
     &:before {
       content: '';
       display: block;
