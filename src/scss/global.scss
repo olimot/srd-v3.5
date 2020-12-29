@@ -348,18 +348,18 @@ li ol {
   padding-left: 1.25em;
 }
 
-nav a {
+nav > a {
   font-size: 87.5%;
   font-weight: bold;
   font-family: initial;
   color: #000000;
 }
 
-nav a:visited {
+nav > a:visited {
   color: #888888;
 }
 
-nav a:active {
+nav > a:active {
   color: #000000;
 }
 
@@ -433,16 +433,16 @@ table {
 }
 
 .layout > header .link,
-.layout > header nav a {
+.layout > header nav > a {
   font-size: 87.5%;
   font-weight: bold;
-  font-family: initial;
+  font-family: sans-serif;
   color: #000000;
   margin-left: 16px;
 }
 
 .layout > header .link:visited,
-.layout > header nav a:visited {
+.layout > header nav > a:visited {
   color: #888888;
 }
 
@@ -484,7 +484,7 @@ table {
   padding: 8px 0;
 }
 
-.layout > nav a {
+.layout > nav > a {
   display: block;
   padding: 4px 16px;
 }
@@ -570,5 +570,10 @@ table {
     max-width: calc(100vw - 32px);
     overflow-x: auto;
     overflow-y: visible;
+  }
+  
+  .table-container table {
+    margin-left: 0;
+    transform: none;
   }
 }
