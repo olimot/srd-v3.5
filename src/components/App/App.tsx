@@ -34,7 +34,9 @@ const App = () => {
                 <ul>
                   {group.pages.map(page => (
                     <li key={page.href}>
-                      <a href={`docs/${page.href.split('.')[0]}`}>{page.textContent}</a>
+                      <Link href={`/docs/${page.href.split('.')[0]}`} prefetch={false}>
+                        {page.textContent}
+                      </Link>
                     </li>
                   ))}
                 </ul>

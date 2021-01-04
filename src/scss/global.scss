@@ -9,12 +9,6 @@ body {
   margin: 16px;
 }
 
-td,
-th {
-  font-size: 14px;
-  line-height: 19px;
-}
-
 main {
   display: block;
 }
@@ -380,6 +374,12 @@ table {
   line-height: 1.2;
 }
 
+td,
+th {
+  font-size: 13px;
+  line-height: 19px;
+}
+
 .layout {
   box-sizing: border-box;
   display: flex;
@@ -571,7 +571,7 @@ table {
     overflow-x: auto;
     overflow-y: visible;
   }
-  
+
   .table-container table {
     margin-left: 0;
     transform: none;
