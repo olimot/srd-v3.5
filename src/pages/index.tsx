@@ -1,8 +1,13 @@
 import React from 'react';
 import App from '../components/App/App';
+import Layout from '../components/Layout';
 
 const index = () => {
-  return <App />;
+  return (
+    <Layout>
+      <App />
+    </Layout>
+  );
 };
 
 export default index;

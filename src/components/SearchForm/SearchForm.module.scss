@@ -1,17 +1,25 @@
-.searchForm {
-  text-align: center;
-}
-
 .searchBox {
   position: relative;
+  input[type='search'] {
+    padding: 0.5em 1em;
+    padding-left: 2.5em;
+    border: 1px solid transparent;
+    border-bottom-color: #eee;
+  }
+  svg {
+    position: absolute;
+    top: 7px;
+    left: 16px;
+  }
 }
 
 .autocmplLayer {
   position: absolute;
   text-align: left;
-  top: 18px;
-  left: 2px;
-  right: 2px;
+  top: 100%;
+  left: 0px;
+  right: 0px;
+  margin-top: -2px;
   background-color: white;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 2px;
@@ -35,12 +43,13 @@
   text-overflow: ellipsis;
   line-height: 1.7;
   &:hover {
-    background-color: #f5f5f5;
+    background-color: #ecf2fb;
     text-decoration: none;
   }
+  &:active,
   &.active {
-    background-color: #08f;
-    color: #fff;
+    background-color: #d2e8fb;
+    color: #000;
     text-decoration: none;
   }
 }

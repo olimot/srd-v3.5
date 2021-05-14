@@ -1,27 +1,20 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */
 import classNames from 'classnames';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
 import anchors from '../../../data/anchors.json';
 import styles from './SearchForm.module.scss';
 
 type SuggestionItem = { id: string; hnum: number; href: string; textContent: string };
 
-const suggestionPool: SuggestionItem[] = anchors.map(item => ({
-  ...item,
-  href: `/docs/${item.href.replace(/\.html/g, '')}`,
-}));
-
-const SearchForm = () => {
+const SearchForm = ({ className }: { className?: string }) => {
   const [search, setSearch] = useState({ value: '', idx: -1 });
-  const router = useRouter();
 
   let [suggestionOnStart, suggestionOnRest] = [[], []] as SuggestionItem[][];
   if (search.value) {
     const searchStartRe = new RegExp(`^${search.value.replace(/[.*+?^${}()|[\]\\]}/g, '\\$&')}`, 'gi');
     const searchRestRe = new RegExp(search.value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
-    [suggestionOnStart, suggestionOnRest] = suggestionPool.reduce(
+    [suggestionOnStart, suggestionOnRest] = anchors.reduce(
       ([sss, srs], item) => {
         if (searchStartRe.test(item.textContent)) return [[...sss, item], srs];
         if (searchRestRe.test(item.textContent)) return [sss, [...srs, item]];
@@ -50,42 +43,46 @@ const SearchForm = () => {
     return () => {};
   }, [suggestion.length]);
   return (
-    <form
-      method="GET"
-      action=""
-      onSubmit={e => {
-        e.preventDefault();
-        if (suggestion.length) router.push(suggestion[0].href);
-        setSearch({ value: '', idx: -1 });
-      }}
-      ref={ref}
-    >
-      <p className={styles.searchForm}>
-        <span className={styles.searchBox}>
-          <input
-            type="search"
-            name="search"
-            placeholder="Go to page..."
-            value={search.value}
-            onChange={e => setSearch({ value: e.target.value, idx: -1 })}
-          />
-          <span className={classNames(styles.autocmplLayer, suggestion.length > 0 && styles.active)}>
-            {suggestion.map((item, idx) => (
-              <Link href={item.href} key={item.href}>
-                <a
-                  className={classNames(styles.autocmplItem, idx === 0 && styles.active)}
-                  onClick={() => setSearch({ value: '', idx: -1 })}
-                >
-                  {item.textContent}
-                </a>
-              </Link>
-            ))}
-          </span>
-        </span>
-        <button type="submit">Go</button>
-      </p>
-    </form>
+    <div className={classNames(styles.searchBox, className)}>
+      <input
+        type="search"
+        name="search"
+        autoComplete="off"
+        placeholder="Search..."
+        value={search.value}
+        onChange={e => setSearch({ value: e.target.value, idx: -1 })}
+      />
+      <svg
+        preserveAspectRatio="xMidYMid meet"
+        height="1em"
+        width="1em"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        stroke="currentColor"
+      >
+        <g>
+          <circle cx="10.5" cy="10.5" r="7.5" />
+          <line x1="21" y1="21" x2="15.8" y2="15.8" />
+        </g>
+      </svg>
+      <span className={classNames(styles.autocmplLayer, suggestion.length > 0 && styles.active)}>
+        {suggestion.map((item, idx) => (
+          <Link href={`/docs/${item.href.replace(/\.html/, '')}`} key={item.href}>
+            <a
+              className={classNames(styles.autocmplItem, idx === 0 && styles.active)}
+              onClick={() => setSearch({ value: '', idx: -1 })}
+            >
+              {item.textContent}
+            </a>
+          </Link>
+        ))}
+      </span>
+    </div>
   );
 };
-
+SearchForm.defaultProps = { className: '' };
 export default SearchForm;

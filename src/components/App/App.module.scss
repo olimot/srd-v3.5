@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+.externalLinks {
+  text-align: right;
+}
+
 .appwrap {
   margin-top: 0;
   h1 {
@@ -11,8 +15,7 @@
 }
 
 .tableOfContents {
-  font-family: sans-serif;
-  column-count: 4;
+  column-count: 1;
   h3 {
     margin: 0 0 0.1em;
     padding-bottom: 0.1em;
@@ -23,10 +26,14 @@
     margin: 0;
     padding: 0;
   }
-}
 
-@media (max-width: 660px) {
-  .tableOfContents {
-    column-count: 1;
+  @media (min-width: 768px) {
+    column-count: 2;
+  }
+  @media (min-width: 1024px) {
+    column-count: 3;
+  }
+  @media (min-width: 1280px) {
+    column-count: 4;
   }
 }
