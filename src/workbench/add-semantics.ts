@@ -3,7 +3,7 @@ import modifyHtmls from './modifyHtmls';
 import documentGroups from '../../data/document-groups.json';
 
 const addSemantics = async () => {
-  const result = await modifyHtmls('./.cache/sanitized-html', './public/html', () => {
+  const result = await modifyHtmls('./.cache/sanitized-html', './data/html', () => {
     const changeTagName = (element: Element, tagName: string, dropAttribute?: boolean) => {
       const newElement = document.createElement(tagName);
       newElement.innerHTML = element.innerHTML;

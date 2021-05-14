@@ -22,7 +22,6 @@ const recurseToBuildTOC = (tocItem: StructuredTocItem, current: typeof anchors[0
 };
 
 const buildTOC = (filename: string) => {
-  console.log(filename);
   const filtered = anchors.filter(anchor => anchor.filename === filename);
   return filtered.reduce((toc, current) => {
     if (toc.length === 0) return [{ anchor: current, children: [] }];
