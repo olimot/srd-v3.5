@@ -5,6 +5,9 @@ body {
   font-size: 16px;
   line-height: 1.2;
   word-break: break-word;
+  @media print {
+    font-size: 13.3333px;
+  }
 }
 
 h1,
