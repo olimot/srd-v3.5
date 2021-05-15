@@ -1,4 +1,4 @@
-import anchors from '../../../data/anchors.json';
+import anchors from '../../anchors.json';
 
 export interface StructuredTocItem {
   anchor: typeof anchors[0];
@@ -6,7 +6,7 @@ export interface StructuredTocItem {
 }
 
 const recurseToBuildTOC = (tocItem: StructuredTocItem, current: typeof anchors[0]): StructuredTocItem[] => {
-  if (tocItem.anchor.hnum < current.hnum)
+  if (tocItem.anchor.level < current.level)
     return [
       {
         anchor: tocItem.anchor,
@@ -21,8 +21,8 @@ const recurseToBuildTOC = (tocItem: StructuredTocItem, current: typeof anchors[0
   return [tocItem, { anchor: current, children: [] }] as StructuredTocItem[];
 };
 
-const buildTOC = (filename: string) => {
-  const filtered = anchors.filter(anchor => anchor.filename === filename);
+const buildTOC = (basename: string) => {
+  const filtered = anchors.filter(anchor => anchor.basename === basename);
   return filtered.reduce((toc, current) => {
     if (toc.length === 0) return [{ anchor: current, children: [] }];
     return [...toc.slice(0, toc.length - 1), ...recurseToBuildTOC(toc[toc.length - 1], current)];

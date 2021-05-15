@@ -3,27 +3,37 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
-import documentGroups from '../../../data/document-groups.json';
+import anchors from '../../anchors.json';
 import SearchForm from '../SearchForm';
 import buildTOC from './buildTOC';
 import styles from './Layout.module.scss';
 import TocItem from './TocItem';
 
+const documentGroups = anchors
+  .filter(a => a.level === 1)
+  .reduce((prev, current) => {
+    const groupIndex = prev.findIndex(group => group.groupName === current.groupName);
+    if (groupIndex === -1) return [...prev, { groupName: current.groupName, pages: [current] }];
+    return [
+      ...prev.slice(0, groupIndex),
+      { ...prev[groupIndex], pages: [...prev[groupIndex].pages, current] },
+      ...prev.slice(groupIndex + 1),
+    ];
+  }, [] as { groupName: string; pages: typeof anchors }[]);
+
 const Layout = ({ children }: { children?: any }) => {
   const router = useRouter();
-  const lastPath = decodeURIComponent(
+  const basename = decodeURIComponent(
     router.asPath
       .split('#')[0]
       .split('/')
       .pop() || '',
   );
-  const filename = `${lastPath}.html`;
-  const toc = buildTOC(filename);
+  const toc = buildTOC(basename);
   const [isSidebarVisible, setSidebarVisible] = useState<boolean | null>(null);
   const [isTOCVisible, setTOCVisible] = useState<boolean | null>(null);
-  const { textContent: currentMenuName, groupName: currentGroupName } =
-    documentGroups.flatMap(a => a.pages.map(b => ({ ...b, groupName: a.groupName }))).find(a => a.href === filename) ||
-    {};
+  const { pageName, groupName: pageGroupName } =
+    anchors.find(anchor => anchor.level === 1 && anchor.basename === basename) || {};
 
   useEffect(() => {
     setSidebarVisible(window.innerWidth >= 1024);
@@ -54,7 +64,7 @@ const Layout = ({ children }: { children?: any }) => {
       )}
     >
       <Head>
-        <title>v3.5 SRD{currentMenuName && ` - ${currentMenuName}`}</title>
+        <title>v3.5 SRD{pageName && ` - ${pageName}`}</title>
       </Head>
       <div className={styles.pageControls}>
         <button type="button" onClick={() => setSidebarVisible(!isSidebarVisible)}>
@@ -78,12 +88,12 @@ const Layout = ({ children }: { children?: any }) => {
           </svg>
         </button>
         <h2>
-          {currentGroupName && (
+          {pageGroupName && (
             <>
-              <span className={styles.currentGroupName}>{currentGroupName}</span> /{' '}
+              <span className={styles.currentGroupName}>{pageGroupName}</span> /{' '}
             </>
           )}
-          {currentMenuName}
+          {pageName}
         </h2>
         {toc.length > 0 && (
           <button type="button" className={styles.toggleTOC} onClick={() => setTOCVisible(!isTOCVisible)}>
@@ -121,7 +131,7 @@ const Layout = ({ children }: { children?: any }) => {
             <h2>In This Article</h2>
             <ul>
               {toc.map(item => (
-                <TocItem key={item.anchor.href} item={item} />
+                <TocItem key={item.anchor.basename} item={item} />
               ))}
             </ul>
           </aside>
@@ -138,13 +148,13 @@ const Layout = ({ children }: { children?: any }) => {
         <ul className={styles.groupList}>
           {documentGroups.map(group => (
             <li key={group.groupName}>
-              <details open={!!group.pages.find(page => page.href === filename)}>
+              <details open={!!group.pages.find(page => page.basename === basename)}>
                 <summary>{group.groupName}</summary>
                 <ul className={styles.inGroupList}>
                   {group.pages.map(page => (
-                    <li key={page.href}>
-                      <Link href={`/docs/${page.href.split('.')[0]}`} prefetch={false}>
-                        <a className={classNames(filename === page.href && 'active')}>{page.textContent}</a>
+                    <li key={page.basename}>
+                      <Link href={`/docs/${page.basename.split('.')[0]}`} prefetch={false}>
+                        <a className={classNames(basename === page.basename && 'active')}>{page.pageName}</a>
                       </Link>
                     </li>
                   ))}

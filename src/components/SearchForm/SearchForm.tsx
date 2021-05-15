@@ -2,10 +2,11 @@
 import classNames from 'classnames';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
-import anchors from '../../../data/anchors.json';
+import anchors from '../../anchors.json';
 import styles from './SearchForm.module.scss';
+import { toLastPath } from '../../anchor-util';
 
-type SuggestionItem = { id: string; hnum: number; href: string; textContent: string };
+type SuggestionItem = typeof anchors[0];
 
 const SearchForm = ({ className }: { className?: string }) => {
   const [search, setSearch] = useState({ value: '', idx: -1 });
@@ -16,8 +17,8 @@ const SearchForm = ({ className }: { className?: string }) => {
     const searchRestRe = new RegExp(search.value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
     [suggestionOnStart, suggestionOnRest] = anchors.reduce(
       ([sss, srs], item) => {
-        if (searchStartRe.test(item.textContent)) return [[...sss, item], srs];
-        if (searchRestRe.test(item.textContent)) return [sss, [...srs, item]];
+        if (searchStartRe.test(item.label)) return [[...sss, item], srs];
+        if (searchRestRe.test(item.label)) return [sss, [...srs, item]];
         return [sss, srs];
       },
       [[], []] as SuggestionItem[][],
@@ -71,12 +72,12 @@ const SearchForm = ({ className }: { className?: string }) => {
       </svg>
       <span className={classNames(styles.autocmplLayer, suggestion.length > 0 && styles.active)}>
         {suggestion.map((item, idx) => (
-          <Link href={`/docs/${item.href.replace(/\.html/, '')}`} key={item.href}>
+          <Link href={`/docs/${toLastPath(item)}`} key={item.filename}>
             <a
               className={classNames(styles.autocmplItem, idx === 0 && styles.active)}
               onClick={() => setSearch({ value: '', idx: -1 })}
             >
-              {item.textContent}
+              {item.label}
             </a>
           </Link>
         ))}

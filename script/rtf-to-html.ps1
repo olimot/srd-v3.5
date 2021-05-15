@@ -1,6 +1,6 @@
 $word = new-object -comobject Word.Application
 try {
-  $rootDir = "$pwd\data\original-rtf"
+  $rootDir = "$pwd\public\original-rtf"
   $outDir = "$pwd\.cache\original-html"
 
   New-Item $outDir -ItemType Directory -ea 0

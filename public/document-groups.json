@@ -1,0 +1,381 @@
+[
+  {
+    "groupName": "Basic Rules and Legal",
+    "pages": [
+      {
+        "label": "Legal Information",
+        "basename": "Legal"
+      },
+      {
+        "label": "Basics and Ability Scores",
+        "basename": "Basics"
+      },
+      {
+        "label": "Alignment and Description",
+        "basename": "Description"
+      },
+      {
+        "label": "Races",
+        "basename": "Races"
+      },
+      {
+        "label": "Character Classes I",
+        "basename": "ClassesI"
+      },
+      {
+        "label": "Character Classes II",
+        "basename": "ClassesII"
+      },
+      {
+        "label": "Skills I",
+        "basename": "SkillsI"
+      },
+      {
+        "label": "Skills II",
+        "basename": "SkillsII"
+      },
+      {
+        "label": "Feats",
+        "basename": "Feats"
+      },
+      {
+        "label": "Equipment",
+        "basename": "Equipment"
+      },
+      {
+        "label": "Special Materials",
+        "basename": "SpecialMaterials"
+      },
+      {
+        "label": "Combat I (Basics)",
+        "basename": "CombatI"
+      },
+      {
+        "label": "Combat II (Movement, Modifiers, and Special Actions)",
+        "basename": "CombatII"
+      },
+      {
+        "label": "Special Abilities and Conditions",
+        "basename": "AbilitiesandConditions"
+      },
+      {
+        "label": "NPC Classes",
+        "basename": "NPCClasses"
+      },
+      {
+        "label": "Prestige Classes",
+        "basename": "PrestigeClasses"
+      },
+      {
+        "label": "Types, Subtypes, and Special Abilities",
+        "basename": "TypesSubtypesAbilities"
+      },
+      {
+        "label": "Carrying, Movement, and Exploration",
+        "basename": "CarryingandExploration"
+      },
+      {
+        "label": "Treasure",
+        "basename": "Treasure"
+      },
+      {
+        "label": "Wilderness, Weather, and Environment",
+        "basename": "WildernessandEnvironment"
+      },
+      {
+        "label": "Traps",
+        "basename": "Traps"
+      },
+      {
+        "label": "Planes",
+        "basename": "Planes"
+      }
+    ]
+  },
+  {
+    "groupName": "Spells",
+    "pages": [
+      {
+        "label": "Magic Overview",
+        "basename": "MagicOverview"
+      },
+      {
+        "label": "Spell List I",
+        "basename": "SpellListI"
+      },
+      {
+        "label": "Spell List II",
+        "basename": "SpellListII"
+      },
+      {
+        "label": "Spells (A-B)",
+        "basename": "SpellsA-B"
+      },
+      {
+        "label": "Spells C",
+        "basename": "SpellsC"
+      },
+      {
+        "label": "Spells (D-E)",
+        "basename": "SpellsD-E"
+      },
+      {
+        "label": "Spells (F-G)",
+        "basename": "SpellsF-G"
+      },
+      {
+        "label": "Spells (H-L)",
+        "basename": "SpellsH-L"
+      },
+      {
+        "label": "Spells (M-O)",
+        "basename": "SpellsM-O"
+      },
+      {
+        "label": "Spells (P-R)",
+        "basename": "SpellsP-R"
+      },
+      {
+        "label": "Spells (S)",
+        "basename": "SpellsS"
+      },
+      {
+        "label": "Spells (T-Z)",
+        "basename": "SpellsT-Z"
+      }
+    ]
+  },
+  {
+    "groupName": "Magic Items",
+    "pages": [
+      {
+        "label": "Magic Items I (Basics and Creation)",
+        "basename": "MagicItemsI"
+      },
+      {
+        "label": "Magic Items II (Armor and Weapons)",
+        "basename": "MagicItemsII"
+      },
+      {
+        "label": "Magic Items III (Potions, Rings, and Rods)",
+        "basename": "MagicItemsIII"
+      },
+      {
+        "label": "Magic Items IV (Scrolls, Staffs, and Wands)",
+        "basename": "MagicItemsIV"
+      },
+      {
+        "label": "Magic Items V (Wondrous Items)",
+        "basename": "MagicItemsV"
+      },
+      {
+        "label": "Magic Items VI (Intelligent, Cursed, and Artifacts)",
+        "basename": "MagicItemsVI"
+      }
+    ]
+  },
+  {
+    "groupName": "Monsters",
+    "pages": [
+      {
+        "label": "Improving Monsters",
+        "basename": "ImprovingMonsters"
+      },
+      {
+        "label": "Monsters (Intro-A)",
+        "basename": "MonstersIntro-A"
+      },
+      {
+        "label": "Monsters (B-C)",
+        "basename": "MonstersB-C"
+      },
+      {
+        "label": "Monsters (D-De)",
+        "basename": "MonstersD-De"
+      },
+      {
+        "label": "Monsters (Di-Do)",
+        "basename": "MonstersDi-Do"
+      },
+      {
+        "label": "Monsters (Dr-Dw)",
+        "basename": "MonstersDr-Dw"
+      },
+      {
+        "label": "Monsters (E-F)",
+        "basename": "MonstersE-F"
+      },
+      {
+        "label": "Monsters (G)",
+        "basename": "MonstersG"
+      },
+      {
+        "label": "Monsters (H-I)",
+        "basename": "MonstersH-I"
+      },
+      {
+        "label": "Monsters (K-L)",
+        "basename": "MonstersK-L"
+      },
+      {
+        "label": "Monsters (M-N)",
+        "basename": "MonstersM-N"
+      },
+      {
+        "label": "Monsters (O-R)",
+        "basename": "MonstersO-R"
+      },
+      {
+        "label": "Monsters (S)",
+        "basename": "MonstersS"
+      },
+      {
+        "label": "Monsters (T-Z)",
+        "basename": "MonstersT-Z"
+      },
+      {
+        "label": "Monsters (Animals)",
+        "basename": "MonstersAnimals"
+      },
+      {
+        "label": "Monsters (Vermin)",
+        "basename": "MonstersVermin"
+      },
+      {
+        "label": "Monster Feats",
+        "basename": "MonsterFeats"
+      },
+      {
+        "label": "Monsters as Races",
+        "basename": "MonstersasRaces"
+      }
+    ]
+  },
+  {
+    "groupName": "Psionics",
+    "pages": [
+      {
+        "label": "Psionic Feats",
+        "basename": "PsionicsFeats"
+      },
+      {
+        "label": "Psionic Races",
+        "basename": "PsionicRaces"
+      },
+      {
+        "label": "Psionic Classes",
+        "basename": "PsionicClasses"
+      },
+      {
+        "label": "Psionic Skills",
+        "basename": "PsionicSkills"
+      },
+      {
+        "label": "Psionic Powers Overview",
+        "basename": "PowersOverview"
+      },
+      {
+        "label": "Psionic Powers List",
+        "basename": "PowerList"
+      },
+      {
+        "label": "Psionic Powers (A-C)",
+        "basename": "PsionicPowersA-C"
+      },
+      {
+        "label": "Psionic Powers (D-F)",
+        "basename": "PsionicPowersD-F"
+      },
+      {
+        "label": "Psionic Powers (G-P)",
+        "basename": "PsionicPowersG-P"
+      },
+      {
+        "label": "Psionic Powers (Q-W)",
+        "basename": "PsionicPowersQ-W"
+      },
+      {
+        "label": "Psionic Monsters",
+        "basename": "PsionicMonsters"
+      },
+      {
+        "label": "Psionic Items",
+        "basename": "PsionicItems"
+      },
+      {
+        "label": "Psionic Spells",
+        "basename": "PsionicSpells"
+      }
+    ]
+  },
+  {
+    "groupName": "Epic",
+    "pages": [
+      {
+        "label": "Epic Level Basics",
+        "basename": "EpicLevelBasics"
+      },
+      {
+        "label": "Epic Classes",
+        "basename": "EpicClasses"
+      },
+      {
+        "label": "Epic Prestige Classes",
+        "basename": "EpicPrestigeClasses"
+      },
+      {
+        "label": "Epic Skills",
+        "basename": "EpicSkills"
+      },
+      {
+        "label": "Epic Feats",
+        "basename": "EpicFeats"
+      },
+      {
+        "label": "Epic Spells",
+        "basename": "EpicSpells"
+      },
+      {
+        "label": "Epic Magic Items 1",
+        "basename": "EpicMagicItems1"
+      },
+      {
+        "label": "Epic Magic Items 2",
+        "basename": "EpicMagicItems2"
+      },
+      {
+        "label": "Epic Monsters (A-E)",
+        "basename": "EpicMonsters(A-E)"
+      },
+      {
+        "label": "Epic Monsters (G-W)",
+        "basename": "EpicMonsters(G-W)"
+      },
+      {
+        "label": "Epic Obstacles",
+        "basename": "EpicObstacles"
+      }
+    ]
+  },
+  {
+    "groupName": "Divine",
+    "pages": [
+      {
+        "label": "Divine Ranks and Powers",
+        "basename": "DivineRanksandPowers"
+      },
+      {
+        "label": "Divine Abilities and Feats",
+        "basename": "DivineAbilitiesandFeats"
+      },
+      {
+        "label": "Divine Domains and Spells",
+        "basename": "DivineDomainsandSpells"
+      },
+      {
+        "label": "Divine Minions",
+        "basename": "DivineMinions"
+      }
+    ]
+  }
+]

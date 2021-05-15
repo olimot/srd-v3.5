@@ -1,8 +1,20 @@
 import classNames from 'classnames';
 import Link from 'next/link';
 import React from 'react';
-import documentGroups from '../../../data/document-groups.json';
+import anchors from '../../anchors.json';
 import styles from './App.module.scss';
+
+const documentGroups = anchors
+  .filter(a => a.level === 1)
+  .reduce((prev, current) => {
+    const groupIndex = prev.findIndex(group => group.groupName === current.groupName);
+    if (groupIndex === -1) return [...prev, { groupName: current.groupName, pages: [current] }];
+    return [
+      ...prev.slice(0, groupIndex),
+      { ...prev[groupIndex], pages: [...prev[groupIndex].pages, current] },
+      ...prev.slice(groupIndex + 1),
+    ];
+  }, [] as { groupName: string; pages: typeof anchors }[]);
 
 const App = () => {
   return (
@@ -32,9 +44,9 @@ const App = () => {
                 <h3>{group.groupName}</h3>
                 <ul>
                   {group.pages.map(page => (
-                    <li key={page.href}>
-                      <Link href={`/docs/${page.href.split('.')[0]}`} prefetch={false}>
-                        {page.textContent}
+                    <li key={page.basename}>
+                      <Link href={`/docs/${page.basename}`} prefetch={false}>
+                        {page.pageName}
                       </Link>
                     </li>
                   ))}

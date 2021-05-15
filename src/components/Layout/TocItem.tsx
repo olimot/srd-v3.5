@@ -1,18 +1,17 @@
-import Link from 'next/link';
 import React from 'react';
 import { StructuredTocItem } from './buildTOC';
 
 const TocLink = ({ item }: { item: StructuredTocItem }) => (
-  <Link href={`/docs/${item.anchor.href.replace(/\.html/, '')}`}>
-    <a data-toc-id={item.anchor.href.split('#').pop()}>{item.anchor.textContent}</a>
-  </Link>
+  <a href={item.anchor.hash} data-toc-id={item.anchor.id}>
+    {item.anchor.label}
+  </a>
 );
 
 const TocList = ({ item }: { item: StructuredTocItem }) => (
   <ul>
     {item.children.map(child => (
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      <TocItem key={child.anchor.href} item={child} />
+      <TocItem key={`${child.anchor.filename}${child.anchor.id}`} item={child} />
     ))}
   </ul>
 );
@@ -20,7 +19,7 @@ const TocList = ({ item }: { item: StructuredTocItem }) => (
 const TocItem = ({ item }: { item: StructuredTocItem }) => {
   return (
     <li>
-      {item.children.length > 0 && item.anchor.hnum !== 1 ? (
+      {item.children.length > 0 && item.anchor.level !== 1 ? (
         <details>
           <summary>
             <TocLink item={item} />
