@@ -79,6 +79,8 @@ const addSemantics = async () => {
       section.insertAdjacentElement('afterbegin', headline);
     });
 
+    document.body.removeAttribute('style');
+
     return Array.from(document.querySelectorAll('[id]'), element => {
       const headline = (element.tagName === 'SECTION'
         ? element.querySelector('h1,h2,h3,h4,h5')
