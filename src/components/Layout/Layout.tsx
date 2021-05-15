@@ -35,7 +35,7 @@ const Layout = ({ children }: { children?: any }) => {
       let cursor: HTMLElement | null = e.target as HTMLElement;
       if (isSidebarVisible && window.innerWidth < 1024) {
         while (cursor && !cursor.classList.contains(styles.sidebar)) cursor = cursor.parentElement;
-        if (!cursor?.classList.contains(styles.toc)) setSidebarVisible(false);
+        if (!cursor?.classList.contains(styles.sidebar)) setSidebarVisible(false);
       } else if (isTOCVisible) {
         while (cursor && !cursor.classList.contains(styles.toc)) cursor = cursor.parentElement;
         if (!cursor?.classList.contains(styles.toc)) setTOCVisible(false);
