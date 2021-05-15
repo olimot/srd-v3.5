@@ -12,14 +12,14 @@ const Post = ({ html }: { html: string }) => {
 };
 
 export async function getStaticPaths() {
-  const filenames = (await fs.readdir('./data/html')).filter(a => a.match(/.html$/));
+  const filenames = (await fs.readdir('./public/raw')).filter(a => a.match(/.html$/));
   const paths = filenames.map(a => `/docs/${a.replace(/\.html/, '')}`);
   return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }: { params: any }) {
   const filename = decodeURIComponent(params.filename as string);
-  const html = await fs.readFile(`./data/html/${filename}.html`, 'utf8');
+  const html = await fs.readFile(`./public/raw/${filename}.html`, 'utf8');
   const [, bodyHTML] = html.match(/<body[^>]*>([\s\S]*)<\/body>/) || [];
   return { props: { filename, html: bodyHTML || '' } };
 }

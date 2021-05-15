@@ -2,7 +2,7 @@ import fs from 'fs-extra';
 import path from 'path';
 
 const index = async () => {
-  const inDir = './data/html';
+  const inDir = './public/raw';
   const htmlInBodies = await fs.readdir(inDir).then(as =>
     Promise.all(
       as
