@@ -78,4 +78,8 @@ details {
 
 .table-container {
   overflow-x: auto;
+  font-size: 0.8333em;
+  @media print {
+    font-size: 1em;
+  }
 }
