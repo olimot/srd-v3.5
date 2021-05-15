@@ -4,31 +4,15 @@ import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
 import anchors from '../../anchors.json';
 import styles from './SearchForm.module.scss';
-import { toLastPath } from '../../anchor-util';
 
 type SuggestionItem = typeof anchors[0];
 
 const SearchForm = ({ className }: { className?: string }) => {
-  const [search, setSearch] = useState({ value: '', idx: -1 });
-
-  let [suggestionOnStart, suggestionOnRest] = [[], []] as SuggestionItem[][];
-  if (search.value) {
-    const searchStartRe = new RegExp(`^${search.value.replace(/[.*+?^${}()|[\]\\]}/g, '\\$&')}`, 'gi');
-    const searchRestRe = new RegExp(search.value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
-    [suggestionOnStart, suggestionOnRest] = anchors.reduce(
-      ([sss, srs], item) => {
-        if (searchStartRe.test(item.label)) return [[...sss, item], srs];
-        if (searchRestRe.test(item.label)) return [sss, [...srs, item]];
-        return [sss, srs];
-      },
-      [[], []] as SuggestionItem[][],
-    );
-  }
-  const suggestion = [...suggestionOnStart, ...suggestionOnRest];
+  const [search, setSearch] = useState({ value: '', idx: -1, suggestions: [] as SuggestionItem[] });
 
   const ref = useRef<HTMLFormElement | null>(null);
   useEffect(() => {
-    if (ref.current && suggestion.length) {
+    if (ref.current && search.suggestions.length) {
       const onclick = (e: MouseEvent) => {
         if (!e.target) return;
         let parent = (e.target as Element).parentElement;
@@ -36,13 +20,14 @@ const SearchForm = ({ className }: { className?: string }) => {
           if (parent === ref.current) return;
           parent = parent.parentElement;
         }
-        setSearch({ value: '', idx: -1 });
+        setSearch({ value: '', idx: -1, suggestions: [] });
       };
       window.addEventListener('click', onclick);
       return () => window.removeEventListener('click', onclick);
     }
     return () => {};
-  }, [suggestion.length]);
+  }, [search.suggestions.length]);
+
   return (
     <div className={classNames(styles.searchBox, className)}>
       <input
@@ -51,7 +36,30 @@ const SearchForm = ({ className }: { className?: string }) => {
         autoComplete="off"
         placeholder="Search..."
         value={search.value}
-        onChange={e => setSearch({ value: e.target.value, idx: -1 })}
+        onChange={e => {
+          let [suggestionOnStart, suggestionOnRest] = [[], []] as SuggestionItem[][];
+          if (e.target.value && e.target.value.length > 1) {
+            const searchStartRe = new RegExp(`^${e.target.value.replace(/[.*+?^${}()|[\]\\]}/g, '\\$&')}`, 'gi');
+            const searchRestRe = new RegExp(e.target.value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+            [suggestionOnStart, suggestionOnRest] = anchors.reduce(
+              ([sss, srs], item) => {
+                if (searchStartRe.test(item.label)) return [[...sss, item], srs];
+                if (searchRestRe.test(item.label)) return [sss, [...srs, item]];
+                return [sss, srs];
+              },
+              [[], []] as SuggestionItem[][],
+            );
+            const nextSuggestions = [
+              ...suggestionOnStart,
+              ...suggestionOnRest.filter(
+                a => !suggestionOnStart.find(b => `${a.basename}${a.hash}` === `${b.basename}${b.hash}`),
+              ),
+            ];
+            setSearch({ value: e.target.value, idx: -1, suggestions: nextSuggestions });
+          } else {
+            setSearch({ value: e.target.value, idx: -1, suggestions: [] });
+          }
+        }}
       />
       <svg
         preserveAspectRatio="xMidYMid meet"
@@ -70,12 +78,12 @@ const SearchForm = ({ className }: { className?: string }) => {
           <line x1="21" y1="21" x2="15.8" y2="15.8" />
         </g>
       </svg>
-      <span className={classNames(styles.autocmplLayer, suggestion.length > 0 && styles.active)}>
-        {suggestion.map((item, idx) => (
-          <Link href={`/docs/${toLastPath(item)}`} key={item.filename}>
+      <span className={classNames(styles.autocmplLayer, search.suggestions.length > 0 && styles.active)}>
+        {search.suggestions.map((item, idx) => (
+          <Link href={`/docs/${item.basename}${item.hash}`} key={`/docs/${item.basename}${item.hash}`}>
             <a
               className={classNames(styles.autocmplItem, idx === 0 && styles.active)}
-              onClick={() => setSearch({ value: '', idx: -1 })}
+              onClick={() => setSearch({ value: '', idx: -1, suggestions: [] })}
             >
               {item.label}
             </a>
