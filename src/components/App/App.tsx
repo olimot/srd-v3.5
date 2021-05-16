@@ -20,9 +20,6 @@ const App = () => {
   return (
     <div className={classNames(styles.app, 'layout')}>
       <div className={classNames(styles.appwrap, 'layout__wrap')}>
-        <p className={styles.externalLinks}>
-          <a href="https://github.com/olimot/srd-v3.5">Github</a>
-        </p>
         <h1 className={styles.center}>Revised (v.3.5) System Reference Document</h1>
         <p>
           The System Reference Document is a comprehensive toolbox consisting of rules, races, classes, feats, skills,
@@ -31,7 +28,9 @@ const App = () => {
           Game Content under the Open Game License, and may use, modify, and distribute it.
         </p>
         <p>
-          Source:{' '}
+          Github:<a href="https://github.com/olimot/srd-v3.5">https://github.com/olimot/srd-v3.5</a>
+          <br />
+          Original Documents:{' '}
           <a href="http://www.wizards.com/default.asp?x=d20/article/srd35">
             http://www.wizards.com/default.asp?x=d20/article/srd35
           </a>
