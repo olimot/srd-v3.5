@@ -18,7 +18,8 @@ const collectAnchors = async () => {
             .toLowerCase()
             .replace(/\s+/, ' ')
             .replace(/(^\w{1})|([^a-zA-Z]\w{1})/g, match => match.toUpperCase())
-            .replace(/\b(i{1,3}|iv|vi{0,3})\b/gi, match => match.toUpperCase()) || '',
+            .replace(/\b(i{1,3}|iv|vi{0,3})\b/gi, match => match.toUpperCase())
+            .replace(/’s/gi, '’s') || '',
         level: parseInt(headline.tagName.substr(1), 10),
         pageName,
         groupName,
