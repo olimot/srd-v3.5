@@ -1,0 +1,115 @@
+.document {
+  margin-bottom: 1em;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    color: #934414;
+    &::before {
+      content: '';
+      display: block;
+      position: relative;
+      width: 0;
+      height: 56px;
+      margin-top: -56px;
+    }
+    a,
+    a:visited {
+      color: inherit;
+    }
+  }
+
+  :global(.original-headline) {
+    margin-top: -1em;
+    margin-bottom: 1em;
+    color: #934414;
+  }
+
+  h1,
+  h2 {
+    font-size: 1.8em;
+    margin: 0.5556em 0;
+    text-transform: capitalize;
+    font-weight: bold;
+  }
+
+  h3 {
+    font-size: 1.2em;
+    margin: 0.8333em 0;
+    font-weight: bold;
+  }
+
+  h4 {
+    font-size: 1.1em;
+    margin: 0.909em 0;
+    font-weight: bold;
+  }
+
+  h5 {
+    font-weight: bold;
+    margin: 1em 0;
+  }
+
+  p {
+    margin: 1em 0;
+  }
+
+  :global(.table-container) {
+    overflow-x: auto;
+    font-size: 0.8333em;
+    margin: 1.2em 0;
+    @media print {
+      font-size: 1em;
+    }
+
+    caption {
+      font-weight: bold;
+      text-align: left;
+      border-bottom: 1px solid #000;
+    }
+
+    td {
+      border-bottom: 1px solid #000;
+    }
+  }
+
+  ul {
+    padding-inline-start: 1em;
+    list-style-type: disc;
+    margin: 1em 0;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  i {
+    font-style: italic;
+  }
+
+  b,
+  strong {
+    font-weight: bold;
+  }
+
+  sup {
+    font-size: 0.625em;
+    vertical-align: top;
+    position: relative;
+    top: -0.2em;
+  }
+  small {
+    font-size: 0.625em;
+  }
+
+  ol li {
+    margin: 1em 0;
+    & > div {
+      margin-left: 0.8em;
+      &:first-child {
+        margin: 0;
+      }
+    }
+  }
+}

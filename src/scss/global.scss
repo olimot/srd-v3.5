@@ -3,60 +3,11 @@
 body {
   font-family: 'Times New Roman', Times, serif;
   font-size: 16px;
-  line-height: 1.2;
+  line-height: 1.4;
   word-break: break-word;
   @media print {
     font-size: 13.3333px;
   }
-}
-
-h1,
-h2,
-h3,
-h4,
-h5 {
-  color: #934414;
-  &::before {
-    content: '';
-    display: block;
-    position: relative;
-    width: 0;
-    height: 56px;
-    margin-top: -56px;
-  }
-  a,
-  a:visited {
-    color: inherit;
-  }
-}
-
-h1,
-h2 {
-  font-size: 1.8em;
-  margin: 0.5556em 0;
-  text-transform: capitalize;
-  font-weight: bold;
-}
-
-h3 {
-  font-size: 1.2em;
-  margin: 0.8333em 0;
-  font-weight: bold;
-}
-
-h4 {
-  font-size: 1.1em;
-  margin: 0.909em 0;
-  font-weight: bold;
-}
-
-h5 {
-  font-weight: bold;
-  margin: 1em 0;
-}
-
-p {
-  margin: 1em 0;
 }
 
 a {
@@ -78,12 +29,4 @@ a {
 
 details {
   cursor: default;
-}
-
-.table-container {
-  overflow-x: auto;
-  font-size: 0.8333em;
-  @media print {
-    font-size: 1em;
-  }
 }

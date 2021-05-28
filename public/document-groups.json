@@ -178,10 +178,6 @@
     "groupName": "Monsters",
     "pages": [
       {
-        "label": "Improving Monsters",
-        "basename": "ImprovingMonsters"
-      },
-      {
         "label": "Monsters (Intro-A)",
         "basename": "MonstersIntro-A"
       },
@@ -242,6 +238,10 @@
         "basename": "MonstersVermin"
       },
       {
+        "label": "Improving Monsters",
+        "basename": "ImprovingMonsters"
+      },
+      {
         "label": "Monster Feats",
         "basename": "MonsterFeats"
       },
@@ -255,8 +255,8 @@
     "groupName": "Psionics",
     "pages": [
       {
-        "label": "Psionic Feats",
-        "basename": "PsionicsFeats"
+        "label": "Psionic Powers Overview",
+        "basename": "PowersOverview"
       },
       {
         "label": "Psionic Races",
@@ -271,8 +271,8 @@
         "basename": "PsionicSkills"
       },
       {
-        "label": "Psionic Powers Overview",
-        "basename": "PowersOverview"
+        "label": "Psionic Feats",
+        "basename": "PsionicsFeats"
       },
       {
         "label": "Psionic Powers List",

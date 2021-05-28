@@ -72,22 +72,29 @@ const sanitizeMsWordHtml = async () => {
         style.display === 'block' &&
         ['BODY', 'TABLE', 'TBODY', 'THEAD', 'TR', 'TH', 'TD', 'BR'].indexOf(element.tagName) === -1
       ) {
+        const marginLeftCssValue = element.style.marginLeft;
         element = changeTagName(element, 'div', true);
+        if (marginLeftCssValue) {
+          const marginLeft = parseFloat(marginLeftCssValue) / 10 || 0;
+          element.style.marginLeft = `${marginLeft.toFixed(4)}em`;
+        }
       }
 
+      // merge downward
       if (['TABLE', 'TBODY', 'THEAD', 'TR'].indexOf(element.tagName) === -1) {
         while (
           element.childNodes.length === 1 &&
           element.childNodes[0].nodeType === 1 &&
-          ['BODY', 'TABLE', 'TBODY', 'THEAD', 'TR', 'TH', 'TD', 'BR'].indexOf(element.children[0].tagName) === -1
+          ['BODY', 'TABLE', 'TBODY', 'THEAD', 'TR', 'TH', 'TD', 'BR'].indexOf(element.children[0].tagName) === -1 &&
+          (element.tagName !== 'TD' || !(element.children[0] as HTMLElement).style.marginLeft)
         ) {
-          const theChild = element.children[0] as HTMLElement;
+          const child = element.children[0] as HTMLElement;
           const verticalAlign =
             element.style.verticalAlign !== '' && element.style.verticalAlign !== 'baseline'
               ? element.style.verticalAlign
-              : theChild.style.verticalAlign;
+              : child.style.verticalAlign;
           const valignCssText = verticalAlign ? `vertical-align:${verticalAlign};` : '';
-          const cssText = `${element.style.cssText}${theChild.style.cssText}${valignCssText}`;
+          const cssText = `${element.style.cssText}${child.style.cssText}${valignCssText}`;
           element.style.cssText = cssText;
           element.innerHTML = element.children[0].innerHTML;
         }

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import styles from './DocumentView.module.scss';
 
 const DocumentView = ({ html }: { html: string }) => {
   useEffect(() => {
@@ -33,7 +34,7 @@ const DocumentView = ({ html }: { html: string }) => {
   }, [html]);
 
   // eslint-disable-next-line react/no-danger
-  return <div dangerouslySetInnerHTML={{ __html: html }} />;
+  return <div className={styles.document} dangerouslySetInnerHTML={{ __html: html }} />;
 };
 
 export default DocumentView;
