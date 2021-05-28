@@ -9,6 +9,8 @@ const documentGroups = anchors
   .reduce((prev, current) => {
     const groupIndex = prev.findIndex(group => group.groupName === current.groupName);
     if (groupIndex === -1) return [...prev, { groupName: current.groupName, pages: [current] }];
+    const pageIndex = prev[groupIndex].pages.findIndex(page => page.pageName === current.pageName);
+    if (pageIndex !== -1) return prev;
     return [
       ...prev.slice(0, groupIndex),
       { ...prev[groupIndex], pages: [...prev[groupIndex].pages, current] },

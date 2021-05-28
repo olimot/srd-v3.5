@@ -14,6 +14,8 @@ const documentGroups = anchors
   .reduce((prev, current) => {
     const groupIndex = prev.findIndex(group => group.groupName === current.groupName);
     if (groupIndex === -1) return [...prev, { groupName: current.groupName, pages: [current] }];
+    const pageIndex = prev[groupIndex].pages.findIndex(page => page.pageName === current.pageName);
+    if (pageIndex !== -1) return prev;
     return [
       ...prev.slice(0, groupIndex),
       { ...prev[groupIndex], pages: [...prev[groupIndex].pages, current] },
@@ -131,7 +133,7 @@ const Layout = ({ children }: { children?: any }) => {
             <h2>In This Article</h2>
             <ul>
               {toc.map(item => (
-                <TocItem key={item.anchor.basename} item={item} />
+                <TocItem key={`${item.anchor.filename}${item.anchor.id}`} item={item} />
               ))}
             </ul>
           </aside>

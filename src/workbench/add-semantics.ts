@@ -6,21 +6,33 @@ const addSemantics = async () => {
     './.cache/sanitized-html',
     './public/raw-html',
     groups => {
-      const changeTagName = (element: Element, tagName: string, dropAttribute?: boolean) => {
+      const changeTagName = (element: HTMLElement, tagName: string) => {
         const newElement = document.createElement(tagName);
         newElement.innerHTML = element.innerHTML;
-        if (!dropAttribute)
-          for (let i = 0; i < element.attributes.length; i += 1)
-            newElement.setAttribute(element.attributes[i].name, element.attributes[i].value);
-        element.parentElement?.insertBefore(newElement, element);
+        for (let i = 0; i < element.attributes.length; i += 1)
+          newElement.setAttribute(element.attributes[i].name, element.attributes[i].value);
+        element.insertAdjacentElement('beforebegin', newElement);
         element.remove();
-        return newElement as Element;
+        return newElement as HTMLElement;
       };
 
+      const getFirstNonEmptyChild = (node: Node) => {
+        let firstNonEmpty = node.firstChild;
+        while (firstNonEmpty && firstNonEmpty.nodeType === 3 && !firstNonEmpty.nodeValue?.trim())
+          firstNonEmpty = firstNonEmpty.nextSibling;
+        return firstNonEmpty;
+      };
+
+      const wrapElement = <T extends HTMLElement>(element: HTMLElement, tagName: string): T => {
+        const wrapperElement = document.createElement(tagName);
+        element.insertAdjacentElement('beforebegin', wrapperElement);
+        wrapperElement.appendChild(element);
+        return wrapperElement as T;
+      };
+
+      // Remove irregular, multiple, or meaningless whitespaces and change newlines to single whitespace
       document.head.childNodes.forEach(n => n.nodeType === 3 && n.remove());
       document.documentElement.childNodes.forEach(n => n.nodeType === 3 && n.remove());
-
-      // Remove irregular whitespaces, multiple whitespaces and newlines to single whitespace
       (() => {
         const nodes = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
         for (let node = nodes.nextNode(); node; node = nodes.nextNode()) {
@@ -28,16 +40,17 @@ const addSemantics = async () => {
         }
       })();
 
-      const removeUselessSpan = () => {
+      // Remove spans not styled
+      (() => {
         let cursor = document.querySelector<HTMLElement>('span:not([style])');
         while (cursor) {
           cursor.outerHTML = cursor.innerHTML;
           cursor = document.querySelector<HTMLElement>('span:not([style])');
         }
-      };
-      removeUselessSpan();
+      })();
 
-      const flatSpan = () => {
+      // Flatten spans
+      (() => {
         let $0 = document.querySelector<HTMLElement>('span span');
         while ($0) {
           const parentElement = $0.parentElement!;
@@ -54,44 +67,48 @@ const addSemantics = async () => {
           }
           $0 = document.querySelector<HTMLElement>('span span');
         }
-      };
-      flatSpan();
+      })();
 
-      document.querySelectorAll('span[style*="vertical-align: super"]').forEach(span => {
+      // make sup tags
+      document.querySelectorAll<HTMLElement>('span[style*="vertical-align: super"]').forEach(span => {
         const sup = changeTagName(span, 'sup') as HTMLElement;
         sup.style.removeProperty('vertical-align');
         sup.style.removeProperty('font-size');
         if (!sup.style.length) sup.removeAttribute('style');
       });
 
-      // merge bold text
-      const mergeBoldText = () => {
+      // make b tags
+      (() => {
         let $0 = document.querySelector<HTMLElement>('span[style*="font-weight"]');
         while ($0) {
-          let $1 = $0.nextSibling;
+          const bElement = wrapElement($0, 'b');
+          $0.style.removeProperty('font-weight');
+          if (!$0.style.length) $0.outerHTML = $0.innerHTML;
+
+          let $1 = bElement.nextSibling;
           while (
             $1 &&
             (($1.nodeType === 3 && !$1.nodeValue!.trim()) ||
               ($1.nodeType === 1 && ($1 as HTMLElement).style.fontWeight))
           ) {
+            bElement.appendChild($1);
             if ($1.nodeType === 1) {
               ($1 as HTMLElement).style.removeProperty('font-weight');
-              if (!($1 as HTMLElement).style.length) ($1 as HTMLElement).removeAttribute('style');
+              if (!($1 as HTMLElement).style.length) ($1 as HTMLElement).outerHTML = ($1 as HTMLElement).innerHTML;
             }
-            $0.appendChild($1);
-            $1 = $0.nextSibling;
+            $1 = bElement.nextSibling;
           }
-          changeTagName($0, 'strong', true);
           $0 = document.querySelector<HTMLElement>('span[style*="font-weight"]');
         }
-      };
-      mergeBoldText();
+      })();
 
-      document.body
-        .querySelectorAll<HTMLSpanElement>('span[style="font-style: italic;"]')
-        .forEach(e => changeTagName(e, 'i', true));
+      // create i tags
+      document.body.querySelectorAll<HTMLSpanElement>('span[style="font-style: italic;"]').forEach(e => {
+        e.outerHTML = `<i>${e.innerHTML}</i>`;
+      });
 
-      document.querySelectorAll<HTMLElement>('strong + strong, i + i, sup + sup').forEach(e => {
+      // merge adjacent elements which have same tags
+      document.querySelectorAll<HTMLElement>('b + b, i + i, sup + sup').forEach(e => {
         while (
           (e.previousSibling?.nodeType === 3 && !e.previousSibling?.nodeValue?.trim()) ||
           (e.previousSibling?.nodeType === 1 && (e.previousSibling as HTMLElement)?.tagName === e.tagName)
@@ -106,33 +123,23 @@ const addSemantics = async () => {
       });
 
       // sanitize whitespaces for inline element
-      document.body.querySelectorAll<HTMLSpanElement>('strong, i').forEach(element => {
+      document.body.querySelectorAll<HTMLSpanElement>('b, i').forEach(element => {
         const firstChildNode = element.childNodes[0];
         if (!firstChildNode) return;
 
         if (firstChildNode.nodeType === 3 && firstChildNode.nodeValue && /^\s/.test(firstChildNode.nodeValue)) {
           firstChildNode.nodeValue = firstChildNode.nodeValue.trimLeft();
           element.insertAdjacentText('beforebegin', ' ');
-          let cursor = element.parentElement;
-          while (cursor?.childNodes[0] === element && cursor?.tagName === 'SPAN') {
-            cursor.insertAdjacentText('beforebegin', ' ');
-            cursor = cursor.parentElement;
-          }
         }
         const lastChildNode = element.childNodes[element.childNodes.length - 1];
         if (lastChildNode.nodeType === 3 && lastChildNode.nodeValue && /\s$/.test(lastChildNode.nodeValue)) {
           lastChildNode.nodeValue = lastChildNode.nodeValue.trimRight();
           element.insertAdjacentText('afterend', ' ');
-          let cursor = element.parentElement;
-          while (cursor && cursor.childNodes[cursor.childNodes.length - 1] === element && cursor.tagName === 'SPAN') {
-            cursor.insertAdjacentText('afterend', ' ');
-            cursor = cursor.parentElement;
-          }
         }
       });
 
-      // Fix error in strongs and change non important strongs to b tags.
-      document.querySelectorAll<HTMLElement>('strong').forEach(e => {
+      // Fix error in b tags
+      document.querySelectorAll<HTMLElement>('b').forEach(e => {
         if (e.textContent === 'Harm:' && e.previousSibling?.nodeValue === ' ') {
           while (e.previousSibling?.nodeValue) e.prepend(e.previousSibling);
         } else if (!e.textContent?.trim().endsWith(':')) {
@@ -156,8 +163,6 @@ const addSemantics = async () => {
             e.outerHTML = e.innerHTML;
           } else if (e.parentElement?.style.fontWeight) {
             e.outerHTML = e.innerHTML;
-          } else {
-            changeTagName(e, 'b', true);
           }
         }
       });
@@ -242,10 +247,10 @@ const addSemantics = async () => {
           const liElement = document.createElement('li');
           $0.parentElement.insertBefore(liElement, $0);
           const [, label] = $0.textContent.match(/^[0-9]\s+([^:]+)(:|$)/i) || [];
-          if (label) $0.setAttribute('aria-label', label);
+          if (label) $0.setAttribute('data-keyword', label);
           liElement.appendChild($0);
 
-          // Only for PowerList.html
+          // Below are only for PowerList.html
           $0.style.removeProperty('margin-left');
           let node = liElement.nextSibling;
           while (
@@ -260,10 +265,8 @@ const addSemantics = async () => {
           ) {
             const next = node.nextSibling;
             if (node.nodeType === 1) {
-              const [, label2] = (node as HTMLElement).textContent!.trim().match(/^([^:]+)(:|$)/i) || [];
-              const newElement = changeTagName(node as Element, 'div', true);
-              if (label2) newElement.setAttribute('aria-label', label2);
-              liElement.appendChild(newElement);
+              liElement.insertAdjacentHTML('beforeend', `<div>${(node as HTMLElement).innerHTML}</div>`);
+              node.remove();
             } else {
               liElement.appendChild(node);
             }
@@ -323,29 +326,31 @@ const addSemantics = async () => {
 
       // create headings and paragraphs
       let title = '';
-      document.body.querySelectorAll('div').forEach($0 => {
-        const element = $0 as HTMLElement;
-        if (!element) return;
-        const fontSizeValue = element.style.fontSize;
+      document.body.querySelectorAll<HTMLElement>('div').forEach($0 => {
+        const fontSizeValue = $0.style.fontSize;
         const fontSize = fontSizeValue ? parseInt(fontSizeValue, 10) : 13.3333;
-        const wrongParent = (() => {
-          let $1: HTMLElement | null = $0.parentElement;
-          while ($1 && $1.tagName !== 'TABLE' && $1.tagName !== 'LI') $1 = $1.parentElement;
-          return $1;
-        })();
-        if (wrongParent) return;
-
-        if (fontSize >= 24 && !title) {
-          changeTagName($0, 'h1', true);
-          title = $0.textContent || '';
-        } else if (fontSize >= 24) changeTagName($0, 'h2', true);
-        else if (fontSize >= 16 && fontSize < 24) changeTagName($0, 'h3', true);
-        else if (
-          (fontSize > 13.3333 && fontSize < 15) ||
-          (element.textContent && !/[a-z]/.test(element.textContent) && !/Legal.html$/i.test(document.location.href))
+        const { textContent } = $0;
+        if (
+          !textContent ||
+          (() => {
+            let $1: HTMLElement | null = $0.parentElement;
+            while ($1 && $1.tagName !== 'TABLE' && $1.tagName !== 'LI') $1 = $1.parentElement;
+            return $1;
+          })()
         )
-          changeTagName($0, 'h4', true);
-        else if ($0.querySelectorAll('div,p,table').length === 0) {
+          return;
+
+        if (fontSize >= 24) {
+          $0.outerHTML = `<h1>${$0.innerHTML}</h1>`;
+          if (!title) title = textContent;
+        } else if (fontSize >= 16 && fontSize < 24) {
+          $0.outerHTML = `<h2>${$0.innerHTML}</h2>`;
+        } else if (
+          (fontSize > 13.3333 && fontSize < 15) ||
+          (!/[a-z]/.test(textContent) && !/Legal.html$/i.test(document.location.href))
+        ) {
+          $0.outerHTML = `<h3>${$0.innerHTML}</h3>`;
+        } else if ($0.querySelectorAll('div,p,table').length === 0) {
           const prevBr =
             $0.previousElementSibling?.tagName === 'BR' &&
             $0.previousElementSibling.previousElementSibling?.className !== 'table-container' &&
@@ -360,13 +365,13 @@ const addSemantics = async () => {
             !/[.:]$/.test(text) &&
             !/Legal.html$/i.test(document.location.href)
           ) {
-            changeTagName($0, 'h5', true);
+            $0.outerHTML = `<h4>${$0.innerHTML}</h4>`;
           } else {
-            const onlyForTracking = $0.cloneNode(true) as HTMLElement;
-            onlyForTracking.querySelectorAll('sup, small').forEach($1 => $1.remove());
-            const [, label2] = onlyForTracking.textContent!.trim().match(/^(?:• )?([^:]+):/i) || [];
-            const newElement = changeTagName($0, 'p');
-            if (label2) newElement.setAttribute('aria-label', label2);
+            const firstNonEmpty = getFirstNonEmptyChild($0);
+            const $1 = firstNonEmpty?.nodeType === 1 ? (firstNonEmpty as HTMLElement) : null;
+            if ($1 && ($1.tagName === 'B' || ($1.tagName === 'I' && $1.textContent?.trim().endsWith(':'))))
+              changeTagName($1, $1.tagName === 'B' ? 'strong' : 'em');
+            changeTagName($0, 'p');
           }
         }
       });
@@ -440,7 +445,7 @@ const addSemantics = async () => {
       document.body.querySelectorAll('tr,tbody').forEach(q => q.removeAttribute('style'));
 
       // create slug and id
-      document.querySelectorAll('h1,h2,h3,h4,h5').forEach((headline, key) => {
+      document.querySelectorAll('h1,h2,h3,h4').forEach((headline, key) => {
         const slug = headline
           .textContent!.trim()
           .toLowerCase()
@@ -451,7 +456,7 @@ const addSemantics = async () => {
       });
 
       // create sections
-      document.querySelectorAll<HTMLHeadingElement>('h1,h2,h3,h4,h5').forEach(headline => {
+      document.querySelectorAll<HTMLHeadingElement>('h1,h2,h3,h4').forEach(headline => {
         const level = parseInt(headline.tagName.substr(1), 10);
         const stopperSelector = Array.from(Array(level), (_, n) => `H${n + 1}`);
         const section = document.createElement('section');

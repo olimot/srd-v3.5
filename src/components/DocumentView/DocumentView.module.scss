@@ -1,10 +1,10 @@
 .document {
+  color: #333;
   margin-bottom: 1em;
   h1,
   h2,
   h3,
-  h4,
-  h5 {
+  h4 {
     color: #934414;
     &::before {
       content: '';
@@ -26,9 +26,15 @@
     color: #934414;
   }
 
-  h1,
-  h2 {
+  h1 {
     font-size: 1.8em;
+    margin: 0.5556em 0;
+    text-transform: capitalize;
+    font-weight: bold;
+  }
+
+  h2 {
+    font-size: 1.5em;
     margin: 0.5556em 0;
     text-transform: capitalize;
     font-weight: bold;
@@ -44,11 +50,6 @@
     font-size: 1.1em;
     margin: 0.909em 0;
     font-weight: bold;
-  }
-
-  h5 {
-    font-weight: bold;
-    margin: 1em 0;
   }
 
   p {
@@ -84,6 +85,7 @@
     border-bottom: none;
   }
 
+  em,
   i {
     font-style: italic;
   }

@@ -19,7 +19,7 @@ const TocList = ({ item }: { item: StructuredTocItem }) => (
 const TocItem = ({ item }: { item: StructuredTocItem }) => {
   return (
     <li>
-      {item.children.length > 0 && item.anchor.level !== 1 ? (
+      {item.children.length > 0 ? (
         <details>
           <summary>
             <TocLink item={item} />
@@ -27,10 +27,7 @@ const TocItem = ({ item }: { item: StructuredTocItem }) => {
           <TocList item={item} />
         </details>
       ) : (
-        <>
-          <TocLink item={item} />
-          <TocList item={item} />
-        </>
+        <TocLink item={item} />
       )}
     </li>
   );
