@@ -444,15 +444,34 @@ const addSemantics = async () => {
 
       document.body.querySelectorAll('tr,tbody').forEach(q => q.removeAttribute('style'));
 
-      // create slug and id
-      document.querySelectorAll('h1,h2,h3,h4').forEach((headline, key) => {
-        const slug = headline
-          .textContent!.trim()
-          .toLowerCase()
-          .replace(/[^a-z0-9]+/g, '-')
-          .replace(/-+$|^-+/g, '');
+      // 1.create slug and id, 2.make spell/power list as ul
+      document.querySelectorAll<HTMLHeadingElement>('h1,h2,h3,h4').forEach((headline, key) => {
+        const textContent = headline.textContent?.trim();
+        if (!textContent) return;
 
+        let slug = textContent.toLowerCase();
+        const from = 'ãàáäâẽèéëêìíïîõòóöôùúüûñç·/_,:;';
+        const to = 'aaaaaeeeeeiiiiooooouuuunc------';
+        for (let i = 0, l = from.length; i < l; i += 1) {
+          slug = slug.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+        }
+        slug = slug
+          .replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+          .replace(/\s+/g, '-') // collapse whitespace and replace by -
+          .replace(/-+/g, '-'); // collapse dashes;
         headline.id = `${headline.tagName.toLowerCase()}-${key}-${slug}`;
+
+        // Make spell or power list to ul
+        const testee = (textContent.match(/^[^(]+/i) || [])[0]?.trim();
+        if (!testee || !/^(0|[1-9](st|nd|rd|th))-level\s.*\s(spell|power)s?$/i.test(testee)) return;
+        headline.dataset.spellLikeList = '1';
+        const ulElement = document.createElement('ul');
+        let $1 = headline.nextElementSibling;
+        while ($1 && $1.tagName === 'P' && $1.children[0] && $1.children[0].tagName === 'STRONG') {
+          ulElement.appendChild(changeTagName($1 as HTMLElement, 'li'));
+          $1 = headline.nextElementSibling;
+        }
+        headline.insertAdjacentElement('afterend', ulElement);
       });
 
       // create sections

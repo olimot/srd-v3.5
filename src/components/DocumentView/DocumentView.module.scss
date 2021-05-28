@@ -75,10 +75,14 @@
     }
   }
 
+  ol,
   ul {
+    margin: 1em 0;
+  }
+
+  .listWithDot {
     padding-inline-start: 1em;
     list-style-type: disc;
-    margin: 1em 0;
   }
 
   tr:last-child td {
@@ -106,7 +110,6 @@
   }
 
   ol li {
-    margin: 1em 0;
     & > div {
       margin-left: 0.8em;
       &:first-child {
