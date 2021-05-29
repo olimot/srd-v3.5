@@ -3,14 +3,18 @@ import styles from './DocumentView.module.scss';
 
 const DocumentView = ({ html }: { html: string }) => {
   useEffect(() => {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        const id = entry.target.getAttribute('id');
-        const tocItem = document.querySelector(`aside a[data-toc-id="${id}"]`);
-        if (!tocItem) return;
-        if (entry.intersectionRatio > 0) tocItem.classList.add('active');
-        else tocItem.classList.remove('active');
+    const onScroll = () => {
+      const tocLinks = Array.from(document.querySelectorAll<HTMLElement>('aside a[data-toc-id]'), element => {
+        const section = document.getElementById(element.dataset.tocId!)!;
+        const distanceToTop = window.scrollY - section.offsetTop;
+        return { element, distanceToTop };
       });
+      tocLinks.sort((a, b) => Math.abs(a.distanceToTop) - Math.abs(b.distanceToTop));
+      const theActive = tocLinks.find(({ distanceToTop }) => distanceToTop > 0) || tocLinks[0];
+      document
+        .querySelectorAll(`aside a.active[data-toc-id]`)
+        .forEach(e => e !== theActive.element && e.classList.remove('active'));
+      theActive.element.classList.add('active');
 
       document.querySelectorAll(`aside details`).forEach(element => {
         const details = element as HTMLDetailsElement;
@@ -24,13 +28,10 @@ const DocumentView = ({ html }: { html: string }) => {
           details.dataset.openedByObserver = 'true';
         }
       });
-    });
-
-    // Track all sections that have an `id` applied
-    document.querySelectorAll('section[id]').forEach(section => {
-      observer.observe(section);
-    });
-    return () => observer.disconnect();
+    };
+    window.addEventListener('scroll', onScroll);
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
   }, [html]);
 
   // eslint-disable-next-line react/no-danger
