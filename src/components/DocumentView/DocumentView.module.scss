@@ -64,6 +64,10 @@
       font-size: 1em;
     }
 
+    table {
+      table-layout: fixed;
+    }
+
     caption {
       font-weight: bold;
       text-align: left;
@@ -71,7 +75,9 @@
     }
 
     td {
+      padding: 0 0.25em;
       border-bottom: 1px solid #000;
+      word-break: keep-all;
     }
   }
 

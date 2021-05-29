@@ -39,6 +39,16 @@ const Layout = ({ children }: { children?: any }) => {
 
   useEffect(() => {
     setSidebarVisible(window.innerWidth >= 1024);
+    const onLinkClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.tagName !== 'A' || window.innerWidth >= 1024) return;
+      setTimeout(() => {
+        setSidebarVisible(false);
+        setTOCVisible(false);
+      }, 33);
+    };
+    window.addEventListener('click', onLinkClick);
+    return () => window.removeEventListener('click', onLinkClick);
   }, []);
 
   useEffect(() => {
@@ -130,6 +140,9 @@ const Layout = ({ children }: { children?: any }) => {
               isTOCVisible === false && styles.tocHidden,
             )}
           >
+            <p>
+              <Link href={`/raw-html/${basename}.html`}>(view unstyled)</Link>
+            </p>
             <h2>In This Article</h2>
             <ul>
               {toc.map(item => (

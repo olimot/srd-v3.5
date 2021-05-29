@@ -30,6 +30,18 @@ const addSemantics = async () => {
         return wrapperElement as T;
       };
 
+      const debug = (element: HTMLElement, message: string) => {
+        let m = message.toLowerCase();
+        if (/[,\s]/i.test(m)) m = `\`${message}\``;
+        if (!element.dataset.debug) {
+          element.dataset.debug = `${m}`;
+          return;
+        }
+        const flags = element.dataset.debug.split(/,\s+/);
+        if (flags.indexOf(m) !== -1) return;
+        element.dataset.debug = [...element.dataset.debug.split(/,\s+/), m].join(', ');
+      };
+
       // Remove irregular, multiple, or meaningless whitespaces and change newlines to single whitespace
       document.head.childNodes.forEach(n => n.nodeType === 3 && n.remove());
       document.documentElement.childNodes.forEach(n => n.nodeType === 3 && n.remove());
@@ -46,6 +58,16 @@ const addSemantics = async () => {
         while (cursor) {
           cursor.outerHTML = cursor.innerHTML;
           cursor = document.querySelector<HTMLElement>('span:not([style])');
+        }
+      })();
+
+      // Flatten divs
+      (() => {
+        let $0 = document.querySelector<HTMLElement>('div > div');
+        while ($0) {
+          const parentElement = $0.parentElement!;
+          parentElement.outerHTML = parentElement.innerHTML;
+          $0 = document.querySelector<HTMLElement>('div > div');
         }
       })();
 
@@ -83,7 +105,7 @@ const addSemantics = async () => {
         while ($0) {
           const bElement = wrapElement($0, 'b');
           $0.style.removeProperty('font-weight');
-          if (!$0.style.length) $0.outerHTML = $0.innerHTML;
+          if (!$0.style.length && $0.tagName === 'SPAN') $0.outerHTML = $0.innerHTML;
 
           let $1 = bElement.nextSibling;
           while (
@@ -93,8 +115,9 @@ const addSemantics = async () => {
           ) {
             bElement.appendChild($1);
             if ($1.nodeType === 1) {
-              ($1 as HTMLElement).style.removeProperty('font-weight');
-              if (!($1 as HTMLElement).style.length) ($1 as HTMLElement).outerHTML = ($1 as HTMLElement).innerHTML;
+              const $2 = $1 as HTMLElement;
+              $2.style.removeProperty('font-weight');
+              if (!$2.style.length && $2.tagName === 'SPAN') $2.outerHTML = $2.innerHTML;
             }
             $1 = bElement.nextSibling;
           }
@@ -244,12 +267,9 @@ const addSemantics = async () => {
 
         // Making unordered list
         if ($0.textContent && /^[0-9]\s/.test($0.textContent.trim()) && firstStyle?.fontWeight === '700') {
-          const liElement = document.createElement('li');
-          $0.parentElement.insertBefore(liElement, $0);
-          const [, label] = $0.textContent.match(/^[0-9]\s+([^:]+)(:|$)/i) || [];
-          if (label) $0.setAttribute('data-keyword', label);
-          liElement.appendChild($0);
-
+          const liElement = wrapElement($0, 'li');
+          const firstB = liElement.querySelector('b');
+          if (firstB) firstB.outerHTML = `<strong>${firstB.innerHTML}</strong>`;
           // Below are only for PowerList.html
           $0.style.removeProperty('margin-left');
           let node = liElement.nextSibling;
@@ -265,6 +285,8 @@ const addSemantics = async () => {
           ) {
             const next = node.nextSibling;
             if (node.nodeType === 1) {
+              const b = (node as HTMLElement).querySelector('b');
+              if (b) b.outerHTML = `<strong>${b.innerHTML}</strong>`;
               liElement.insertAdjacentHTML('beforeend', `<div>${(node as HTMLElement).innerHTML}</div>`);
               node.remove();
             } else {
@@ -293,6 +315,11 @@ const addSemantics = async () => {
               const smallElement = document.createElement('small');
               smallElement.textContent = $1.nodeValue;
               newDivElement.appendChild(smallElement);
+              if (smallElement.previousSibling?.nodeValue?.endsWith('[')) {
+                const p = smallElement.previousSibling!;
+                p.nodeValue = p.nodeValue!.substr(0, p.nodeValue!.length - 1);
+                smallElement.insertAdjacentText('afterbegin', '[');
+              }
             } else {
               newDivElement.appendChild($1);
             }
@@ -393,11 +420,71 @@ const addSemantics = async () => {
         else document.title = `v3.5 SRD / ${thePage.groupName} / ${thePage.label || title}`;
       })();
 
+      // Fix table errors in EpicMagicItems1.html
+      if (/EpicMagicItems2.html$/i.test(document.location.href)) {
+        const h4s = Array.from(document.querySelectorAll('h4'));
+        const actualSpellLevel = h4s.find($0 => $0.textContent?.trim() === 'Table: Actual Spell Level');
+        const metamagicLevel = h4s.find($0 => $0.textContent?.trim() === 'Table: Metamagic Level Adjustment to Spells');
+        const staffs = Array.from(document.querySelectorAll('h1')).find($0 => $0.textContent?.trim() === 'STAFFS');
+        if (actualSpellLevel && metamagicLevel && staffs) {
+          const mergeTablesBetween = (start: Element, end: Element) => {
+            const tableContainer = document.createElement('div');
+            const table = document.createElement('table');
+            const tbody = document.createElement('tbody');
+            table.appendChild(tbody);
+            tableContainer.appendChild(table);
+            tableContainer.className = 'table-container';
+            start.insertAdjacentElement('afterend', tableContainer);
+
+            let $0 = tableContainer.nextElementSibling;
+            while ($0 && $0 !== end) {
+              if ($0.className === 'table-container') {
+                tbody.insertAdjacentHTML('beforeend', $0.querySelector('tbody')!.innerHTML);
+              } else {
+                tbody.insertAdjacentHTML(
+                  'beforeend',
+                  `<tr><td colspan="2" style="font-weight: 700;">${$0.textContent?.trim() || ''}</td></tr>`,
+                );
+              }
+              $0.remove();
+              $0 = tableContainer.nextElementSibling;
+            }
+          };
+          mergeTablesBetween(actualSpellLevel, metamagicLevel);
+          mergeTablesBetween(metamagicLevel, staffs);
+        }
+      }
+
       // sanitize table attributes, add captions in tables
       document.body.querySelectorAll('table').forEach($0 => {
         $0.removeAttribute('width');
         $0.removeAttribute('valign');
-        $0.style.removeProperty('margin-left');
+        $0.removeAttribute('style');
+        const numColumn = Math.max(...Array.from($0.querySelectorAll('tr'), tr => tr.children.length));
+        const firstFullColumnTr = Array.from($0.querySelectorAll('tr')).find(tr => {
+          const tds = tr.querySelectorAll('td');
+          if (tds.length !== numColumn) return false;
+          if (tr.querySelector('td[colspan]')) {
+            return false;
+          }
+          return true;
+        });
+
+        if (!firstFullColumnTr) debug($0, 'no-full-column');
+
+        if (firstFullColumnTr) {
+          const widths = Array.from(firstFullColumnTr.querySelectorAll('td'), td =>
+            td.style.width ? parseFloat(td.style.width) || 0 : 0,
+          );
+          const tableWidth = widths.reduce((a, b) => a + b + 0.5 /* padding */);
+          const hasNarrowTable = tableWidth <= 51.9;
+          if (!hasNarrowTable) $0.style.minWidth = `${tableWidth}em`;
+          $0.querySelectorAll('td').forEach(td => {
+            if (td.parentElement !== firstFullColumnTr) td.style.removeProperty('width');
+          });
+        }
+
+        // Add/Replace captions
         const prevElement = $0.parentElement!.previousElementSibling;
         const prevHeadingText = prevElement && prevElement.tagName.startsWith('H') && prevElement.textContent?.trim();
         if (prevElement && prevHeadingText && /^Table: /i.test(prevHeadingText)) {
@@ -414,9 +501,8 @@ const addSemantics = async () => {
           p.appendChild(strong);
           prevElement.insertAdjacentElement('beforebegin', p);
           prevElement.remove();
-          $0.dataset.noCaption = '1';
+          debug($0, 'no-caption');
         } else {
-          const numColumn = Math.max(...Array.from($0.querySelectorAll('tr'), tr => tr.children.length));
           const firstCell = $0.querySelector('td') as HTMLTableCellElement;
           const textContent = firstCell.textContent?.trim() || '';
           if (firstCell.colSpan === numColumn && /^Table: /i.test(textContent)) {
@@ -425,7 +511,7 @@ const addSemantics = async () => {
             $0.insertAdjacentElement('afterbegin', caption);
             firstCell.parentElement?.remove();
           } else {
-            $0.dataset.noCaption = '1';
+            debug($0, 'no-caption');
           }
         }
       });
@@ -435,7 +521,7 @@ const addSemantics = async () => {
         q.removeAttribute('valign');
         const { width, fontWeight, fontStyle, verticalAlign, paddingLeft } = q.style;
         q.removeAttribute('style');
-        if (width) q.style.width = width;
+        if (width) q.style.minWidth = width;
         if (fontWeight) q.style.fontWeight = fontWeight;
         if (verticalAlign) q.style.fontWeight = fontWeight;
         if (fontStyle) q.style.fontStyle = fontStyle;
@@ -464,7 +550,6 @@ const addSemantics = async () => {
         // Make spell or power list to ul
         const testee = (textContent.match(/^[^(]+/i) || [])[0]?.trim();
         if (!testee || !/^(0|[1-9](st|nd|rd|th))-level\s.*\s(spell|power)s?$/i.test(testee)) return;
-        headline.dataset.spellLikeList = '1';
         const ulElement = document.createElement('ul');
         let $1 = headline.nextElementSibling;
         while ($1 && $1.tagName === 'P' && $1.children[0] && $1.children[0].tagName === 'STRONG') {
@@ -474,7 +559,18 @@ const addSemantics = async () => {
         headline.insertAdjacentElement('afterend', ulElement);
       });
 
-      // create sections
+      // Split Blockwise bold texts in list items to div and strong
+      document.querySelectorAll<HTMLDivElement>('li > div[style="font-weight: 700;"]').forEach($0 => {
+        $0.removeAttribute('style');
+        $0.innerHTML = `<strong>${$0.innerHTML}</strong>`;
+      });
+
+      // Remove empty style attribute
+      document.querySelectorAll<HTMLElement>('[style]').forEach($0 => {
+        if (!$0.style.length) $0.removeAttribute('style');
+      });
+
+      // Create sections
       document.querySelectorAll<HTMLHeadingElement>('h1,h2,h3,h4').forEach(headline => {
         const level = parseInt(headline.tagName.substr(1), 10);
         const stopperSelector = Array.from(Array(level), (_, n) => `H${n + 1}`);
