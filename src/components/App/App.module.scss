@@ -30,6 +30,24 @@
     padding: 0;
   }
 
+  a {
+    color: #000;
+    text-decoration: none;
+    &:hover,
+    &:focus-visible {
+      text-decoration: underline;
+    }
+    &:visited {
+      color: #444;
+    }
+
+    &:global(.active),
+    &:global(.active):visited {
+      color: #bb191f;
+      text-decoration: underline;
+    }
+  }
+
   @media (min-width: 768px) {
     column-count: 2;
   }

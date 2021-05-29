@@ -371,12 +371,13 @@ const addSemantics = async () => {
           $0.outerHTML = `<h1>${$0.innerHTML}</h1>`;
           if (!title) title = textContent;
         } else if (fontSize >= 16 && fontSize < 24) {
-          $0.outerHTML = `<h2>${$0.innerHTML}</h2>`;
+          const t = /[a-z]/g.test($0.textContent!) ? `h3` : `h2`
+          $0.outerHTML = `<${t}>${$0.innerHTML}</${t}>`;
         } else if (
           (fontSize > 13.3333 && fontSize < 15) ||
           (!/[a-z]/.test(textContent) && !/Legal.html$/i.test(document.location.href))
         ) {
-          $0.outerHTML = `<h3>${$0.innerHTML}</h3>`;
+          $0.outerHTML = `<h4>${$0.innerHTML}</h4>`;
         } else if ($0.querySelectorAll('div,p,table').length === 0) {
           const prevBr =
             $0.previousElementSibling?.tagName === 'BR' &&
@@ -392,7 +393,7 @@ const addSemantics = async () => {
             !/[.:]$/.test(text) &&
             !/Legal.html$/i.test(document.location.href)
           ) {
-            $0.outerHTML = `<h4>${$0.innerHTML}</h4>`;
+            $0.outerHTML = `<h5>${$0.innerHTML}</h5>`;
           } else {
             const firstNonEmpty = getFirstNonEmptyChild($0);
             const $1 = firstNonEmpty?.nodeType === 1 ? (firstNonEmpty as HTMLElement) : null;
@@ -422,9 +423,9 @@ const addSemantics = async () => {
 
       // Fix table errors in EpicMagicItems1.html
       if (/EpicMagicItems2.html$/i.test(document.location.href)) {
-        const h4s = Array.from(document.querySelectorAll('h4'));
-        const actualSpellLevel = h4s.find($0 => $0.textContent?.trim() === 'Table: Actual Spell Level');
-        const metamagicLevel = h4s.find($0 => $0.textContent?.trim() === 'Table: Metamagic Level Adjustment to Spells');
+        const h5s = Array.from(document.querySelectorAll('h5'));
+        const actualSpellLevel = h5s.find($0 => $0.textContent?.trim() === 'Table: Actual Spell Level');
+        const metamagicLevel = h5s.find($0 => $0.textContent?.trim() === 'Table: Metamagic Level Adjustment to Spells');
         const staffs = Array.from(document.querySelectorAll('h1')).find($0 => $0.textContent?.trim() === 'STAFFS');
         if (actualSpellLevel && metamagicLevel && staffs) {
           const mergeTablesBetween = (start: Element, end: Element) => {
@@ -531,7 +532,7 @@ const addSemantics = async () => {
       document.body.querySelectorAll('tr,tbody').forEach(q => q.removeAttribute('style'));
 
       // 1.create slug and id, 2.make spell/power list as ul
-      document.querySelectorAll<HTMLHeadingElement>('h1,h2,h3,h4').forEach((headline, key) => {
+      document.querySelectorAll<HTMLHeadingElement>('h1,h2,h3,h4,h5').forEach((headline, key) => {
         const textContent = headline.textContent?.trim();
         if (!textContent) return;
 
@@ -571,7 +572,7 @@ const addSemantics = async () => {
       });
 
       // Create sections
-      document.querySelectorAll<HTMLHeadingElement>('h1,h2,h3,h4').forEach(headline => {
+      document.querySelectorAll<HTMLHeadingElement>('h1,h2,h3,h4,h5').forEach(headline => {
         const level = parseInt(headline.tagName.substr(1), 10);
         const stopperSelector = Array.from(Array(level), (_, n) => `H${n + 1}`);
         const section = document.createElement('section');

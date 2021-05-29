@@ -7,7 +7,7 @@ const collectAnchors = async () => {
     const [, groupName, pageName] = document.title.split(' / ');
     return Array.from(document.querySelectorAll('[id]'), element => {
       const headline = (element.tagName === 'SECTION'
-        ? element.querySelector('h1,h2,h3,h4')
+        ? element.querySelector('h1,h2,h3,h4,h5')
         : element) as HTMLElement;
 
       return {
