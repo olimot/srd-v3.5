@@ -60,9 +60,6 @@
     overflow-x: auto;
     font-size: 0.8333em;
     margin: 1.2em 0;
-    @media print {
-      font-size: 1em;
-    }
 
     table {
       table-layout: fixed;
