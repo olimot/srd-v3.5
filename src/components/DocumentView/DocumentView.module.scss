@@ -80,10 +80,16 @@
       border-bottom: 1px solid #000;
     }
 
+    th,
     td {
       padding: 0 0.25em;
       border-bottom: 1px solid #000;
       word-break: keep-all;
+    }
+    th {
+      font-weight: 700;
+      text-align: left;
+      vertical-align: bottom;
     }
   }
 

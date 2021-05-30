@@ -371,7 +371,7 @@ const addSemantics = async () => {
           $0.outerHTML = `<h1>${$0.innerHTML}</h1>`;
           if (!title) title = textContent;
         } else if (fontSize >= 16 && fontSize < 24) {
-          const t = /[a-z]/g.test($0.textContent!) ? `h3` : `h2`
+          const t = /[a-z]/g.test($0.textContent!) ? `h3` : `h2`;
           $0.outerHTML = `<${t}>${$0.innerHTML}</${t}>`;
         } else if (
           (fontSize > 13.3333 && fontSize < 15) ||
@@ -530,6 +530,24 @@ const addSemantics = async () => {
       });
 
       document.body.querySelectorAll('tr,tbody').forEach(q => q.removeAttribute('style'));
+
+      // Clean bold div in td tags
+      document.body.querySelectorAll('td').forEach(td => {
+        const divTexts = Array.from(
+          td.querySelectorAll<HTMLDivElement>('div[style*="font-weight"]'),
+          div => div.innerHTML,
+        );
+        if (divTexts.length) {
+          const th = changeTagName(td, 'th');
+          th.innerHTML = divTexts.join('<br>');
+        }
+      });
+
+      // change bold td to th
+      document.body.querySelectorAll<HTMLTableCellElement>('td[style*="font-weight"]').forEach(td => {
+        td.style.removeProperty('font-weight');
+        changeTagName(td, 'th');
+      });
 
       // 1.create slug and id, 2.make spell/power list as ul
       document.querySelectorAll<HTMLHeadingElement>('h1,h2,h3,h4,h5').forEach((headline, key) => {
