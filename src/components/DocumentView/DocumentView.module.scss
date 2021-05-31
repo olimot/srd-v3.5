@@ -91,6 +91,11 @@
       text-align: left;
       vertical-align: bottom;
     }
+
+    tr:last-child td,
+    tr:last-child th {
+      border-bottom: none;
+    }
   }
 
   ol,
@@ -101,10 +106,6 @@
   .listWithDot {
     padding-inline-start: 1em;
     list-style-type: disc;
-  }
-
-  tr:last-child td {
-    border-bottom: none;
   }
 
   em,
