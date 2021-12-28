@@ -2,7 +2,6 @@
   "compilerOptions": {
     "target": "ES2015",
     "moduleResolution": "node",
-    "strict": true,
     "esModuleInterop": true,
     "declaration": true,
     "declarationMap": true,
@@ -17,9 +16,11 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
     "module": "esnext",
-    "isolatedModules": true
+    "isolatedModules": true,
+    "strict": false,
+    "noEmit": true,
+    "incremental": true
   },
   "include": [
     "src/**/*.ts",

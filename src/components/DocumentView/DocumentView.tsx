@@ -5,7 +5,7 @@ const DocumentView = ({ html }: { html: string }) => {
   useEffect(() => {
     const onScroll = () => {
       const tocLinks = Array.from(document.querySelectorAll<HTMLElement>('aside a[data-toc-id]'), element => {
-        const section = document.getElementById(element.dataset.tocId!)!;
+        const section = document.getElementById(element.dataset.tocId!) as HTMLElement;
         const distanceToTop = window.scrollY - section.offsetTop + 16;
         return { element, distanceToTop };
       });
