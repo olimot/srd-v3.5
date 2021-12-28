@@ -1,5 +1,6 @@
 module.exports = {
   extends: ['airbnb-typescript', 'prettier', 'prettier/react', 'prettier/@typescript-eslint'],
+  plugins: ['react', 'jsx-a11y', 'import', 'prettier', '@typescript-eslint'],
   parserOptions: { project: './tsconfig.json' },
   env: { es2020: true, node: true, browser: true },
   rules: {
