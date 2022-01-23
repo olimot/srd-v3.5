@@ -142,23 +142,23 @@ th {
 
 @media (prefers-color-scheme: dark) {
   html {
-    background: #1f1f1f;
-    color: #fff;
+    background: #1e1e1e;
+    color: #d4d4d4;
   }
 
   [style*='background-color: #fff'] {
-    background-color: #1f1f1f !important;
+    background-color: #1e1e1e !important;
   }
 
   a:link {
-    color: #7dd5ff;
+    color: #569cd6;
   }
 
   a:visited {
-    color: #cdafff;
+    color: #c586c0;
   }
 
   a:active {
-    color: #ffa6a6;
+    color: #d16969;
   }
 }
