@@ -5,7 +5,7 @@
     <meta content="width=device-width,minimum-scale=1.0" name="viewport" />
     <title>v3.5 SRD / Index</title>
     <link rel="stylesheet" href="main.css" />
-    <script src="main.js"></script>
+    <script src="main.js" type="module"></script>
     <style>
       @media screen and (min-width: 832px) {
         ul {
@@ -30,6 +30,9 @@
     </style>
   </head>
   <body>
+    <form id="search-form" method="GET" action="search.html">
+      <input type="search" id="input" name="q" autocomplete="on" /> <button type="submit" id="submit">Search</button>
+    </form>
     <h1>Revised (v.3.5) System Reference Document</h1>
     <p>
       Github Repository: <a href="https://github.com/olimot/srd-v3.5">https://github.com/olimot/srd-v3.5</a><br />

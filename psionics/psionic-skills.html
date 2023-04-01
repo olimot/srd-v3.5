@@ -12,28 +12,14 @@
       This material is Open Game Content, and is licensed for public use under the terms of the Open Game License v1.0a.
     </p>
     <h1>PSIONIC SKILLS</h1>
-    <h2>Table of Contents</h2>
-    <ul id="table-of-contents">
-      <li>
-        <a href="#skill-descriptions">Skill Descriptions</a>
-        <ul>
-          <li><a href="#autohypnosis">Autohypnosis(Wis; Trained Only)</a></li>
-          <li><a href="#concentration">Concentration(Con)</a></li>
-          <li><a href="#knowledge">Knowledge (Psionics)(Int)</a></li>
-          <li><a href="#psicraft">Psicraft (Int; Trained Only)</a></li>
-          <li>
-            <a href="#use-psionic-device">Use Psionic Device (Cha; Trained Only)</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
+
     <h2 id="skill-descriptions">Skill Descriptions</h2>
     <p>
       The skills below relate to the use of psionics. In addition to three new skills (Autohypnosis, Psicraft, and Use
       Psionic Device), a new category is provided for the Knowledge skill, and new uses are given for Concentration.
     </p>
     <table class="half-width-table">
-      <caption>
+      <caption id="skill-descriptions--table-skill-synergies">
         Table: Skill Synergies
       </caption>
       <tbody>
@@ -63,9 +49,12 @@
         </tr>
       </tbody>
     </table>
-    <h3 id="autohypnosis">Autohypnosis<small>(Wis; Trained Only)</small></h3>
+    <h3 id="skill-descriptions--autohypnosiswis-trained-only">Autohypnosis<small>(Wis; Trained Only)</small></h3>
     <p>You have trained your mind to gain mastery over your body and the mind’s own deepest capabilities.</p>
-    <p><strong>Check:</strong> The DC and the effect of a successful check depend on the task you attempt.</p>
+    <p>
+      <strong id="skill-descriptions--autohypnosiswis-trained-only--check">Check:</strong> The DC and the effect of a
+      successful check depend on the task you attempt.
+    </p>
     <table data-debug="no-caption" class="half-width-table">
       <tbody>
         <tr>
@@ -99,63 +88,66 @@
       </tbody>
     </table>
     <p>
-      <em>Ignore Caltrop Wound:</em> If you are wounded by stepping on a caltrop, your speed is reduced to one-half
-      normal. A successful Autohypnosis check removes this movement penalty. The wound doesn’t go away—it is just
-      ignored through self-persuasion.
+      <em id="skill-descriptions--autohypnosiswis-trained-only--check--ignore-caltrop-wound">Ignore Caltrop Wound:</em>
+      If you are wounded by stepping on a caltrop, your speed is reduced to one-half normal. A successful Autohypnosis
+      check removes this movement penalty. The wound doesn’t go away—it is just ignored through self-persuasion.
     </p>
     <p>
-      <em>Memorize:</em> You can attempt to memorize a long string of numbers, a long passage of verse, or some other
-      particularly difficult piece of information (but you can’t memorize magical writing or similarly exotic scripts).
-      Each successful check allows you to memorize a single page of text (up to 800 words), numbers, diagrams, or sigils
-      (even if you don’t recognize their meaning). If a document is longer than one page, you can make additional checks
-      for each additional page. You always retain this information; however, you can recall it only with another
-      successful Autohypnosis check.
+      <em id="skill-descriptions--autohypnosiswis-trained-only--check--memorize">Memorize:</em> You can attempt to
+      memorize a long string of numbers, a long passage of verse, or some other particularly difficult piece of
+      information (but you can’t memorize magical writing or similarly exotic scripts). Each successful check allows you
+      to memorize a single page of text (up to 800 words), numbers, diagrams, or sigils (even if you don’t recognize
+      their meaning). If a document is longer than one page, you can make additional checks for each additional page.
+      You always retain this information; however, you can recall it only with another successful Autohypnosis check.
     </p>
     <p>
-      <em>Resist Dying:</em> You can attempt to subconsciously prevent yourself from dying. If you have negative hit
-      points and are losing hit points (at 1 per round, 1 per hour), you can substitute a DC 15 Autohypnosis check for
-      your d% roll to see if you become stable. If the check is successful, you stop losing hit points (you do not gain
-      any hit points, however, as a result of the check). You can substitute this check for the d% roll in later rounds
-      if you are initially unsuccessful.
+      <em id="skill-descriptions--autohypnosiswis-trained-only--check--resist-dying">Resist Dying:</em> You can attempt
+      to subconsciously prevent yourself from dying. If you have negative hit points and are losing hit points (at 1 per
+      round, 1 per hour), you can substitute a DC 15 Autohypnosis check for your d% roll to see if you become stable. If
+      the check is successful, you stop losing hit points (you do not gain any hit points, however, as a result of the
+      check). You can substitute this check for the d% roll in later rounds if you are initially unsuccessful.
     </p>
     <p>
-      <em>Resist Fear:</em> In response to any fear effect, you make a saving throw normally. If you fail the saving
-      throw, you can make an Autohypnosis check on your next round even while overcome by fear. If your autohypnosis
-      check meets or beats the DC for the fear effect, you shrug off the fear. On a failed check, the fear affects you
-      normally, and you gain no further attempts to shrug off that particular fear effect.
+      <em id="skill-descriptions--autohypnosiswis-trained-only--check--resist-fear">Resist Fear:</em> In response to any
+      fear effect, you make a saving throw normally. If you fail the saving throw, you can make an Autohypnosis check on
+      your next round even while overcome by fear. If your autohypnosis check meets or beats the DC for the fear effect,
+      you shrug off the fear. On a failed check, the fear affects you normally, and you gain no further attempts to
+      shrug off that particular fear effect.
     </p>
     <p>
-      <em>Tolerate Poison:</em> You can choose to substitute an Autohypnosis check for a saving throw against any
-      standard poison’s secondary damage or effect. This skill has no effect on the initial saving throw against poison.
+      <em id="skill-descriptions--autohypnosiswis-trained-only--check--tolerate-poison">Tolerate Poison:</em> You can
+      choose to substitute an Autohypnosis check for a saving throw against any standard poison’s secondary damage or
+      effect. This skill has no effect on the initial saving throw against poison.
     </p>
     <p>
-      <em>Willpower:</em> If reduced to 0 hit points (disabled), you can make an Autohypnosis check. If successful, you
-      can take a normal action while at 0 hit points without taking 1 point of damage. You must make a check for each
-      strenuous action you want to take. A failed Autohypnosis check in this circumstance carries no direct penalty—you
-      can choose not to take the strenuous action and thus avoid the hit point loss. If you do so anyway, you drop to –1
-      hit points, as normal when disabled.
+      <em id="skill-descriptions--autohypnosiswis-trained-only--check--willpower">Willpower:</em> If reduced to 0 hit
+      points (disabled), you can make an Autohypnosis check. If successful, you can take a normal action while at 0 hit
+      points without taking 1 point of damage. You must make a check for each strenuous action you want to take. A
+      failed Autohypnosis check in this circumstance carries no direct penalty—you can choose not to take the strenuous
+      action and thus avoid the hit point loss. If you do so anyway, you drop to –1 hit points, as normal when disabled.
     </p>
     <p>
-      <strong>Action:</strong> None. Making an Autohypnosis check doesn’t require an action; it is either a free action
-      (when attempted reactively) or part of another action (when attempted actively).
+      <strong id="skill-descriptions--autohypnosiswis-trained-only--action">Action:</strong> None. Making an
+      Autohypnosis check doesn’t require an action; it is either a free action (when attempted reactively) or part of
+      another action (when attempted actively).
     </p>
     <p>
-      <strong>Try Again:</strong> Yes, for memorize and willpower uses, though a success doesn’t cancel the effects of a
-      previous failure. No for the other uses.
+      <strong id="skill-descriptions--autohypnosiswis-trained-only--try-again">Try Again:</strong> Yes, for memorize and
+      willpower uses, though a success doesn’t cancel the effects of a previous failure. No for the other uses.
     </p>
     <p>
-      <strong>Synergy:</strong> If you have 5 or more ranks in Autohypnosis, you get a +2 bonus on Knowledge (psionics)
-      checks.
+      <strong id="skill-descriptions--autohypnosiswis-trained-only--synergy">Synergy:</strong> If you have 5 or more
+      ranks in Autohypnosis, you get a +2 bonus on Knowledge (psionics) checks.
     </p>
     <p>If you have 5 or more ranks in Concentration, you get a +2 bonus on Autohypnosis checks.</p>
-    <h3 id="concentration">Concentration<small>(Con)</small></h3>
+    <h3 id="skill-descriptions--concentrationcon">Concentration<small>(Con)</small></h3>
     <p>You are particularly good at focusing your mind.</p>
     <p>The following are additional uses for the concentration skill.</p>
     <p>
-      <strong>Check:</strong> You must make a Concentration check whenever you might potentially be distracted (by
-      taking damage, by harsh weather, and so on) while engaged in some action that requires your full attention. Such
-      actions include manifesting a power, concentrating on an active power, directing a power, or using a psi-like
-      ability.
+      <strong id="skill-descriptions--concentrationcon--check">Check:</strong> You must make a Concentration check
+      whenever you might potentially be distracted (by taking damage, by harsh weather, and so on) while engaged in some
+      action that requires your full attention. Such actions include manifesting a power, concentrating on an active
+      power, directing a power, or using a psi-like ability.
     </p>
     <p>
       If the Concentration check succeeds, you can continue with the action as normal. If the check fails, the action
@@ -230,9 +222,10 @@
       </tbody>
     </table>
     <p>
-      <em>Gain Psionic Focus:</em> Merely holding a reservoir of psionic power points in mind gives psionic characters a
-      special energy. Psionic characters can put that energy to work without actually paying a power point cost—they can
-      become psionically focused as a special use of the Concentration skill.
+      <em id="skill-descriptions--concentrationcon--check--gain-psionic-focus">Gain Psionic Focus:</em> Merely holding a
+      reservoir of psionic power points in mind gives psionic characters a special energy. Psionic characters can put
+      that energy to work without actually paying a power point cost—they can become psionically focused as a special
+      use of the Concentration skill.
     </p>
     <p>
       If you have 1 or more power points available, you can meditate to attempt to become psionically focused. The DC to
@@ -247,29 +240,31 @@
       sleep (or enter a meditative trance, in the case of elans), or until your power point reserve drops to 0.
     </p>
     <p>
-      <strong>Action:</strong> Usually none. In most cases, making a Concentration check doesn’t require an action; it
-      is either a free action (when attempted reactively) or part of another action (when attempted actively).
-      Meditating to gain psionic focus is a full-round action.
+      <strong id="skill-descriptions--concentrationcon--action">Action:</strong> Usually none. In most cases, making a
+      Concentration check doesn’t require an action; it is either a free action (when attempted reactively) or part of
+      another action (when attempted actively). Meditating to gain psionic focus is a full-round action.
     </p>
     <p>
-      <strong>Try Again:</strong> Yes, though a success doesn’t cancel the effects of a previous failure, such as the
-      loss of the power points for a power being manifested or the disruption of a power being concentrated on.
+      <strong id="skill-descriptions--concentrationcon--try-again">Try Again:</strong> Yes, though a success doesn’t
+      cancel the effects of a previous failure, such as the loss of the power points for a power being manifested or the
+      disruption of a power being concentrated on.
     </p>
     <p>
-      <strong>Special:</strong> You can use Concentration to manifest a power or use a psi-like ability defensively, so
-      as to avoid attacks of opportunity altogether. The DC of the check is 15 + the power’s level. If the Concentration
-      check succeeds, you can manifest normally without provoking any attacks of opportunity. If the Concentration check
-      fails, the power also automatically fails and the power points are wasted, just as if your concentration had been
-      disrupted by a distraction.
+      <strong id="skill-descriptions--concentrationcon--special">Special:</strong> You can use Concentration to manifest
+      a power or use a psi-like ability defensively, so as to avoid attacks of opportunity altogether. The DC of the
+      check is 15 + the power’s level. If the Concentration check succeeds, you can manifest normally without provoking
+      any attacks of opportunity. If the Concentration check fails, the power also automatically fails and the power
+      points are wasted, just as if your concentration had been disrupted by a distraction.
     </p>
     <p>
       A character with the Combat Manifestation feat gets a +4 bonus on Concentration checks made to manifest a power or
       use a psi-like ability while on the defensive or while grappling or pinned.
     </p>
     <p>
-      <strong>Synergy:</strong> If you have 5 or more ranks in Concentration, you get a +2 bonus on Autohypnosis checks.
+      <strong id="skill-descriptions--concentrationcon--synergy">Synergy:</strong> If you have 5 or more ranks in
+      Concentration, you get a +2 bonus on Autohypnosis checks.
     </p>
-    <h3 id="knowledge">Knowledge (Psionics)<small>(Int)</small></h3>
+    <h3 id="skill-descriptions--knowledge-psionicsint">Knowledge (Psionics)<small>(Int)</small></h3>
     <p>
       Like the Craft and Profession skills, Knowledge actually encompasses a number of unrelated skills. This entry
       specifically relates to the body of lore dealing with the phenomena of psionics in all its many manifestations.
@@ -280,19 +275,20 @@
       vulnerabilities.
     </p>
     <p>
-      <strong>Synergy:</strong> If you have 5 or more ranks in Knowledge (psionics), you get a +2 bonus on Psicraft
-      checks.
+      <strong id="skill-descriptions--knowledge-psionicsint--synergy">Synergy:</strong> If you have 5 or more ranks in
+      Knowledge (psionics), you get a +2 bonus on Psicraft checks.
     </p>
     <p>If you have 5 or more ranks in Autohypnosis, you get a +2 bonus on Knowledge (psionics) checks.</p>
     <p>
-      <strong>Untrained:</strong> An untrained Knowledge (psionics) check is simply an Intelligence check. Without
-      actual training, you know only common knowledge (DC 10 or lower).
+      <strong id="skill-descriptions--knowledge-psionicsint--untrained">Untrained:</strong> An untrained Knowledge
+      (psionics) check is simply an Intelligence check. Without actual training, you know only common knowledge (DC 10
+      or lower).
     </p>
-    <h3 id="psicraft">Psicraft <small>(Int; Trained Only)</small></h3>
+    <h3 id="skill-descriptions--psicraft-int-trained-only">Psicraft <small>(Int; Trained Only)</small></h3>
     <p>Use this skill to identify powers as they are manifest or powers already in place.</p>
     <p>
-      <strong>Check:</strong> You can identify powers and psionic effects. The DCs for Psicraft checks relating to
-      various tasks are summarized on the table below.
+      <strong id="skill-descriptions--psicraft-int-trained-only--check">Check:</strong> You can identify powers and
+      psionic effects. The DCs for Psicraft checks relating to various tasks are summarized on the table below.
     </p>
     <table data-debug="no-caption" class="full-width-table">
       <tbody>
@@ -363,30 +359,33 @@
       Additionally, certain powers allow you to gain information about psionic effects, provided that you make a
       successful Psicraft check as detailed in the power description.
     </p>
-    <p><strong>Action:</strong> Varies, as noted above.</p>
-    <p><strong>Try Again:</strong> See above.</p>
+    <p><strong id="skill-descriptions--psicraft-int-trained-only--action">Action:</strong> Varies, as noted above.</p>
+    <p><strong id="skill-descriptions--psicraft-int-trained-only--try-again">Try Again:</strong> See above.</p>
     <p>
-      <strong>Special:</strong> A psion gains a +2 bonus on Psicraft checks when dealing with a power or effect from his
-      discipline.
+      <strong id="skill-descriptions--psicraft-int-trained-only--special">Special:</strong> A psion gains a +2 bonus on
+      Psicraft checks when dealing with a power or effect from his discipline.
     </p>
     <p>If you have the Psionic Affinity feat, you get a +2 bonus on Psicraft checks.</p>
     <p>
-      <strong>Synergy:</strong> If you have 5 or more ranks in Psicraft, you get a +2 bonus on Use Psionic Device checks
-      related to power stones.
+      <strong id="skill-descriptions--psicraft-int-trained-only--synergy">Synergy:</strong> If you have 5 or more ranks
+      in Psicraft, you get a +2 bonus on Use Psionic Device checks related to power stones.
     </p>
     <p>
       If you have 5 or more ranks in Use Psionic Device, you get a +2 bonus on Psicraft checks to address power stones.
     </p>
-    <h3 id="use-psionic-device">Use Psionic Device <small>(Cha; Trained Only)</small></h3>
+    <h3 id="skill-descriptions--use-psionic-device-cha-trained-only">
+      Use Psionic Device <small>(Cha; Trained Only)</small>
+    </h3>
     <p>
       Use this skill to activate psionic devices, including power stones (chunks of crystal that store specific powers)
       and dorjes (slender crystal wands charged with several uses of the same power), that otherwise you could not
       activate.
     </p>
     <p>
-      <strong>Check:</strong> You can use this skill to address a power stone (to learn what powers are encoded on it)
-      or to activate a psionic item. This skill lets you use a psionic item as if you had the manifesting ability or
-      class features of another class, as if you were a different race, or as if you were a different alignment.
+      <strong id="skill-descriptions--use-psionic-device-cha-trained-only--check">Check:</strong> You can use this skill
+      to address a power stone (to learn what powers are encoded on it) or to activate a psionic item. This skill lets
+      you use a psionic item as if you had the manifesting ability or class features of another class, as if you were a
+      different race, or as if you were a different alignment.
     </p>
     <p>
       You make Use Psionic Device checks each time you activate a device such as a dorje. If you are using the check to
@@ -438,10 +437,11 @@
       </tbody>
     </table>
     <p>
-      <em>Activate Blindly:</em> Some psionic items are activated by special specific thoughts or conceptions. You can
-      activate such items as if you were using the activation method, even if you’re not and even if you don’t know it.
-      You do have to use something equivalent. You have to wave the item around or otherwise attempt to get it to
-      activate. You get a special +2 bonus if you’ve activated the item at least once before.
+      <em id="skill-descriptions--use-psionic-device-cha-trained-only--check--activate-blindly">Activate Blindly:</em>
+      Some psionic items are activated by special specific thoughts or conceptions. You can activate such items as if
+      you were using the activation method, even if you’re not and even if you don’t know it. You do have to use
+      something equivalent. You have to wave the item around or otherwise attempt to get it to activate. You get a
+      special +2 bonus if you’ve activated the item at least once before.
     </p>
     <p>
       If you fail the check by 10 or more, you suffer brainburn. This brainburn affects you in the same way as brainburn
@@ -450,43 +450,57 @@
       manifesting a power from a power stone.
     </p>
     <p>
-      <em>Address a Power Stone:</em> Successfully addressing a power stone allows you to find out what power or powers
-      it contains. Doing this requires 1 minute of concentration.
+      <em id="skill-descriptions--use-psionic-device-cha-trained-only--check--address-a-power-stone"
+        >Address a Power Stone:</em
+      >
+      Successfully addressing a power stone allows you to find out what power or powers it contains. Doing this requires
+      1 minute of concentration.
     </p>
     <p>
-      <em>Emulate an Ability Score:</em> To manifest a power from a power stone, you need a high ability score in the
-      appropriate ability. Your effective ability score (appropriate to the class you’re emulating when you try to
-      manifest the power from the power stone) is your check result minus 15. If you already have a high enough score in
-      the appropriate ability, you don’t need to make this check.
+      <em id="skill-descriptions--use-psionic-device-cha-trained-only--check--emulate-an-ability-score"
+        >Emulate an Ability Score:</em
+      >
+      To manifest a power from a power stone, you need a high ability score in the appropriate ability. Your effective
+      ability score (appropriate to the class you’re emulating when you try to manifest the power from the power stone)
+      is your check result minus 15. If you already have a high enough score in the appropriate ability, you don’t need
+      to make this check.
     </p>
     <p>
-      <em>Emulate an Alignment:</em> Some psionic items have positive or negative effects based on your alignment. Use
-      Psionic Device lets you use these items as if you were of an alignment of your choice. You can emulate only one
-      alignment at a time.
+      <em id="skill-descriptions--use-psionic-device-cha-trained-only--check--emulate-an-alignment"
+        >Emulate an Alignment:</em
+      >
+      Some psionic items have positive or negative effects based on your alignment. Use Psionic Device lets you use
+      these items as if you were of an alignment of your choice. You can emulate only one alignment at a time.
     </p>
     <p>
-      <em>Emulate a Class Feature:</em> Sometimes you need to use a class feature to activate a psionic item. Your
-      effective level in the emulated class equals your check result minus 20. This skill does not let you use the class
-      feature of another class. It just lets you activate items as if you had the class feature.
+      <em id="skill-descriptions--use-psionic-device-cha-trained-only--check--emulate-a-class-feature"
+        >Emulate a Class Feature:</em
+      >
+      Sometimes you need to use a class feature to activate a psionic item. Your effective level in the emulated class
+      equals your check result minus 20. This skill does not let you use the class feature of another class. It just
+      lets you activate items as if you had the class feature.
     </p>
     <p>
       If the class whose feature you are emulating has an alignment requirement, you must meet it, either honestly or by
       emulating an appropriate alignment as a separate check (see above).
     </p>
     <p>
-      <em>Emulate a Race:</em> Some psionic items work only for certain races, or work better for those of certain
-      races. You can use such an item as if you were a race of your choice. You can emulate only one race at a time.
+      <em id="skill-descriptions--use-psionic-device-cha-trained-only--check--emulate-a-race">Emulate a Race:</em> Some
+      psionic items work only for certain races, or work better for those of certain races. You can use such an item as
+      if you were a race of your choice. You can emulate only one race at a time.
     </p>
     <p>
-      <em>Use a Dorje:</em> Normally, to use a dorje, you must have the dorje’s power on your class power list. This use
-      of the skill allows you to use a dorje as if you had a particular power on your class power list. This use of the
-      skill applies to other power trigger psionic items, if applicable.
+      <em id="skill-descriptions--use-psionic-device-cha-trained-only--check--use-a-dorje">Use a Dorje:</em> Normally,
+      to use a dorje, you must have the dorje’s power on your class power list. This use of the skill allows you to use
+      a dorje as if you had a particular power on your class power list. This use of the skill applies to other power
+      trigger psionic items, if applicable.
     </p>
     <p>
-      <em>Use a Power Stone:</em> Normally, to manifest a power from a power stone, you must have the power stone’s
-      power on your class power list. This use of the skill allows you to use a power stone as if you had a particular
-      power on your class power list. The DC is equal to 20 + the manifester level of the power you are trying to
-      manifest from the power stone. <i>Note:</i> Before you use
+      <em id="skill-descriptions--use-psionic-device-cha-trained-only--check--use-a-power-stone">Use a Power Stone:</em>
+      Normally, to manifest a power from a power stone, you must have the power stone’s power on your class power list.
+      This use of the skill allows you to use a power stone as if you had a particular power on your class power list.
+      The DC is equal to 20 + the manifester level of the power you are trying to manifest from the power stone.
+      <i>Note:</i> Before you use
     </p>
     <p>
       a power stone, you must first have addressed it to determine what powers it contains. In addition, manifesting a
@@ -495,19 +509,23 @@
       applies to other power completion psionic items.
     </p>
     <p>
-      <strong>Action:</strong> None. The Use Psionic Device check is made as part of the action (if any) required to
-      activate the psionic item.
+      <strong id="skill-descriptions--use-psionic-device-cha-trained-only--action">Action:</strong> None. The Use
+      Psionic Device check is made as part of the action (if any) required to activate the psionic item.
     </p>
     <p>
-      <strong>Try Again:</strong> Yes, but if you ever roll a natural 1 while attempting to activate an item and you
-      fail, you can’t try to activate it again for a day.
+      <strong id="skill-descriptions--use-psionic-device-cha-trained-only--try-again">Try Again:</strong> Yes, but if
+      you ever roll a natural 1 while attempting to activate an item and you fail, you can’t try to activate it again
+      for a day.
     </p>
-    <p><strong>Special:</strong> You cannot take 10 with this skill.</p>
+    <p>
+      <strong id="skill-descriptions--use-psionic-device-cha-trained-only--special">Special:</strong> You cannot take 10
+      with this skill.
+    </p>
     <p>You can’t aid another on Use Psionic Device checks. Only the user of the item can attempt such a check.</p>
     <p>A character with the Psionic Affinity feat gets a +2 bonus on Use Psionic Device checks.</p>
     <p>
-      <strong>Synergy:</strong> If you have 5 or more ranks in Psicraft, you get a +2 bonus on Use Magic Device checks
-      related to power stones.
+      <strong id="skill-descriptions--use-psionic-device-cha-trained-only--synergy">Synergy:</strong> If you have 5 or
+      more ranks in Psicraft, you get a +2 bonus on Use Magic Device checks related to power stones.
     </p>
     <p>
       If you have 5 or more ranks in Use Psionic Device, you get a +2 bonus on Psicraft checks to address power stones.

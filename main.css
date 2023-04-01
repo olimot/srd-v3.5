@@ -162,3 +162,70 @@ th {
     color: #d16969;
   }
 }
+
+#search-form {
+  padding: 1em 0;
+  display: flex;
+  gap: 4px;
+}
+
+#input {
+  display: block;
+  margin: 0.14285714285714285em 0;
+  padding: 0 0.5em;
+  width: 100%;
+  max-width: 100%;
+  height: 2.2142857142857144em;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  outline: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
+    Open Sans, Helvetica Neue, sans-serif;
+  font-size: 100%;
+  line-height: 1;
+}
+
+#submit {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
+    Open Sans, Helvetica Neue, sans-serif;
+  background: transparent;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 0 0.6428571428571429em;
+  margin: 0.14285714285714285em;
+  border-radius: 3px;
+  font-size: 100%;
+  height: 2.2142857142857144em;
+  line-height: 1;
+  position: relative;
+  outline: 0;
+}
+
+#submit:hover {
+  transition: all 0.1s ease;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+#submit:focus {
+  transition: all 0.1s ease;
+  box-shadow: 0 0 0 2px rgba(113, 168, 218, 0.6588);
+}
+
+#submit:active {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.search-result-item {
+  margin: 4em 0;
+}
+
+.search-result-item .path-text {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
+    Open Sans, Helvetica Neue, sans-serif;
+  color: #666;
+  font-size: 13px;
+}
+
+.search-result-item h3 {
+  margin-top: 0;
+}
