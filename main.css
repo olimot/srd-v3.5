@@ -88,7 +88,7 @@ th {
 .middle-line::before,
 .middle-line::after {
   background-color: #000;
-  content: "";
+  content: '';
   display: inline-block;
   height: 1px;
   position: relative;
@@ -125,9 +125,13 @@ th {
   font-size: 16px;
 }
 
-.by-level-table th,
 .by-level-table td {
+  vertical-align: top;
   border: 0;
+}
+
+.by-level-table td:first-child {
+  width: 2.5em;
 }
 
 @media screen and (min-width: 832px) {
