@@ -77,6 +77,8 @@ th {
   vertical-align: bottom;
 }
 
+/* https://stackoverflow.com/questions/5214127/css-technique-for-a-horizontal-line-with-words-in-the-middle#answer-14731123 */
+
 .middle-line {
   overflow: hidden;
   text-align: center;
