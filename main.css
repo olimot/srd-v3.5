@@ -77,6 +77,32 @@ th {
   vertical-align: bottom;
 }
 
+.middle-line {
+  overflow: hidden;
+  text-align: center;
+}
+
+.middle-line::before,
+.middle-line::after {
+  background-color: #000;
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 50%;
+}
+
+.middle-line::before {
+  right: 0.5em;
+  margin-left: -50%;
+}
+
+.middle-line::after {
+  left: 0.5em;
+  margin-right: -50%;
+}
+
 .full-width-table {
   display: block;
   overflow-x: auto;
